@@ -1,0 +1,74 @@
+Most of the MakerNote information in the exifprobe code is taken from
+documents posted to the web by the people listed below. If errors exist,
+they are likely due to transription errors on my part, or to additions I
+have made after examining a few images (notify me at dhh@virutal-cafe.com).
+If I've missed a proper attribution, please let me know about that, too.
+
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+/* Nikon, Fujitsu (Fujifilm), Olympus                                 */
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+TsuruZoh Tachibanaya at:
+    http://www.ba.wakwak.com/~tsuruzoh/Computer/Digicams/exif-e.html
+
+The Nikon E990 data in that document is attributed to Max Lyons,
+and may also be found at:
+    http://www.tawbaware.com/990exif.htm
+
+Additonal tags for later Nikons (specifically E5700) from web page by
+Johannes Tschebisch at:
+    http://www.jojotsch.de/
+
+The Casio information in that document is attributed to Eckhard Henkel:
+    (see Dicasoft below)
+
+The Olympus information in that document is attributed to Peter Esherick.
+
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+/* Canon                                                              */
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+David Burren at:
+    http://www.burren.cx/david/canon.html
+
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+/* Casio (older models)                                               */
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+Dicasoft:
+    http://www.dicasoft.de/casiomn.htm
+
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+/* Sanyo                                                              */
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+John Hawkins at:
+    http://www.exif.org/makernotes/SanyoMakerNote.html
+
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+/* Minolta DiMAGE 5, 7*, S304, S404, S414, F300                       */
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+Dalibor Jelinek at:
+    http://www.dalibor.cz/minolta/makernote.htm
+
+Upates for A1, A2 by Stanislav Brabec
+    http://www.penguin.cz/~utx
+
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+/* Panasonic                                                          */
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+Tom Hughes
+    tom@compton.nu
+
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+/* Sigma/Foveon  (NOTE: manufacturer data!)                           */
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+http://www.x3f.info/technotes/FileDocs/MakerNoteDoc.html
+
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+/* PrintIM structure, Asahi makernotes, latest Casio notes            */
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+evan@ozhiker.com
+    http://www.ozhiker.com/electronics/pjmt/jpeg_info/pim.html
+
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+/* April, 2005: Olympus, Nikon, Canon, Asahi updates; some CIFF info  */
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+Phil Harvey (author of 'exiftool') at: 
+   http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/index.html

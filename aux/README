@@ -1,0 +1,30 @@
+These programs are rather crude but may be useful.
+
+extract_section - extracts a section of a file given start offset
+                  and length, or start and end offset (which you
+                  can get from exifprobe output). An easy way to
+                  extract embedded JPEGs.
+
+findjpeg        - scan a file for valid jpeg streams. VERY crude,
+                  and not useful on mostly binary files.
+
+dump_section    - print a specified chunk of a file as bytes,
+                  shorts, longs, or short or long rationals.
+
+probetohtml     - a simple shell script which uses 'sed' to convert
+                  color escape sequences to font color tags and
+                  generate an HTML file for the output of exifprobe.
+
+reformat.sh     - script to reformat LIST output to change dots to
+                  underscores, remove comments, etc. to make the
+                  output acceptable to a shell for sourcine. The
+                  '-var' and '-export' options of exifgrep are no
+                  longer adequate for that purpose.
+
+convert_rgb_to_tiff -  convert the RGB section of a Canon CR2 file to
+                       a 384x256 TIFF image that anybody can see.
+                       Uses ImageMagick 'convert' utility.
+
+convert_rgb_to_jpeg -  convert the RGB section of a Canon CR2 file to
+                       a 384x256 JPEG image that anybody can see.
+                       Uses ImageMagick 'convert' utility.

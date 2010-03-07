@@ -1,0 +1,187 @@
+#!/bin/sh
+# Convert the output of 'exifprobe' to a simple HTML file.
+# Usage:
+# probe2html [exifprobe options] pathname  
+#   (runs exifprobe with options on 'pathname' and writes a file named by
+#   the last component of 'pathname' + the options (with spaces removed)
+#   and a ".html" extension.
+# OR
+# [command] | probetohtml - [command | almost anything]
+#   [command] should generate exifprobe output (e.g. 'exifgrep').  The '-'
+#   argument to probe2html forces reading from stdin; the output filename
+#   is a unique filename generated from the first word following the '-'
+#   the prefix PROBE, a number making the filename unique, and the extension
+#   ".html".  The page will be titled with *all* of the words following '-'
+
+# This allows something like
+# exifgrep Maker some/file/name | probe2html - exifgrep some/file/name
+# which will produce a file PROBEexifgrep.0.html with the output of that
+# command and a title which shows the command.
+
+unique_name()
+{
+    prefix=
+    case $# in
+        0) name="unique.$$" ;;
+        *) name=$1; prefix=$2; suffix=$3 ;;
+    esac
+
+    case ${prefix} in
+        X) prefix= ;;
+    esac
+
+    case "${suffix}" in
+        .*|"") ;;
+            *) suffix=.${suffix} ;;
+    esac
+
+    if test -d ${prefix}${name}${suffix} -o -d ${prefix}${name}.0${suffix}
+    then
+        vers=1
+        while test -d ${prefix}${name}.${vers}${suffix}
+        do
+            vers=`expr $vers + 1`
+        done
+    fi
+
+    if test -f ${prefix}${name}${suffix} -o -f ${prefix}${name}.0${suffix}
+    then
+        vers=${vers:=1}
+        while test -f ${prefix}${name}.${vers}${suffix} -o -f ${prefix}${name}.${vers}${suffix}.gz -o -d ${prefix}${name}.${vers}${suffix} 
+        do
+            vers=`expr $vers + 1`
+        done
+    fi
+
+    case "${vers}" in
+        "") echo ${prefix}${name}.0${suffix} ;;
+         *) echo ${prefix}${name}.${vers}${suffix} ;;
+    esac
+}
+
+# Get the last component of the argument pathname
+lastcomp()
+{
+  local oifs
+  #local IFS
+
+  oifs="${IFS}"
+  IFS=/
+  set -- ${1}
+  IFS="${oifs}" 
+
+  case "${1}" in
+    "") case $# in
+          0) ;;
+          *) shift ;;
+        esac
+        ;;
+  esac
+    while test $# -gt 1 
+    do
+      case "${2}" in
+        "") break ;;
+      esac
+      shift
+    done
+
+  echo ${1}
+}
+
+# Get the first component of the argument pathname
+firstcomp()
+{
+  local oifs
+
+  oifs="${IFS}"
+  IFS=/
+  set -- ${1}
+  IFS="${oifs}" 
+
+  basename $1 .d
+}
+
+# make a temp file for the sed script...
+tmp=$(mktemp /tmp/PROBE.XXXXXX)
+
+# and make the script
+cat << 'END' > ${tmp}
+s/</\&lt;/g
+s/>/\&gt;/g
+s/\[0m/<\/FONT>/g
+s/\[30m/<FONT color="BLACK">/g
+s/\[31m/<FONT color="RED">/g
+s/\[32m/<FONT color="GREEN">/g
+s/\[35m/<FONT color="MAGENTA">/g
+s/\[94m/<FONT color="BLUE">/g
+s/\[90m/<FONT color="GRAY">/g
+END
+
+probeopts=
+suffix=
+lastcomp=
+
+while test $# -gt 1
+do
+    case "$1" in
+         -) infile=stdin
+            basename=$2
+            destfile=$( unique_name ${basename} PROBE .html )
+            shift
+            title="$*"
+            suffix=
+            set -- 
+            break
+            ;;
+        -*) probeopts="${probeopts} $1"
+            suffix="${suffix}$1" 
+            shift
+            ;;
+         *) break ;;
+    esac
+done
+
+
+case ${infile} in
+ stdin) ;;
+     *) case $# in
+            0) echo "$0: no input file" 1>&2; exit 1 ;;
+        esac
+        infile=$1
+        destfile=$( lastcomp ${infile} )
+        title=$( firstcomp ${infile} )
+        title="${title} - $destfile ${probeopts}"
+        destfile="${destfile}${suffix}.html" 
+        ;;
+esac
+
+echo input file is ${infile}
+
+# Start the page
+cat << HEAD > ${destfile}
+<HTML>
+<HEAD>
+<TITLE>
+${title}
+</TITLE>
+</HEAD>
+<BODY>
+<PRE>
+HEAD
+
+case "${infile}" in
+ stdin) sed -f ${tmp} >> ${destfile}
+        ;;
+     *) ${PROBE} ${probeopts} ${infile} | sed -f ${tmp} >> ${destfile} ;;
+esac
+
+# end the file
+cat << TAIL >> ${destfile}
+</PRE>
+</BODY>
+TAIL
+
+# Done
+rm -f ${tmp}
+echo output file is ${destfile}
+echo title is ${title}

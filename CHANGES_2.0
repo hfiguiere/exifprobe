@@ -1,0 +1,164 @@
+2.0.1:
+The following changes have been made since version 2.0.0:
+
+General code cleanup and bug-fixes for variables which could be
+used before being set.
+
+Fixed some missing 'break' statements in 'default' branches of several
+switch statements in print_filetype().  These apparently caused gcc
+3.4.3 to abort under Linux.
+
+Updates to Minolta MakerNotes for A1 and A2 models, contributed by
+Stanislav Brabec.  Also added an identifier for the DiMAGE 5, and
+updated the CamerSettings ImageSize.  Now catches and flags the
+'count' bug in the 'ImageByteSize' makernote tag, rather than
+printing spurious multiple values at the ImageByteSize value used
+as an offset.
+
+In jp2000.c, 'mark' characters for file offsets were inconsistent.
+Now '@' is used for all box tags, and '=' for untagged entries.
+Also added a missing initialization for 'max_offset' in process_jp2_de().
+
+APP sections and image data was omitted from output in LIST mode;
+now printed as 'pseudo-tags' in "@offset:length" format.  Also
+print_offset_makervalue() was not printing @offset:length for
+UNDEFINED sections in REPORT mode.
+
+All 'pseudo-tags' are now marked with '*' in the address field
+(these only appear in LIST mode, where the address field is not
+enabled by default).
+
+'Tiled' jpeg images included in tiff IFDs can be compressed
+tile-by-tile.  This has been seen in a few DNG images.  It caused
+report of "early EOI" when the first tile EOI was found, and the
+remaining tiles ignored.  The program now expands the first and
+last tile, with just tile numbers in between.
+
+The TIFF 'XML' tag now has a name.
+
+In main(), the file close was handled outside check for null file
+pointer, and would cause a core dump if no file was open.  I hate
+it when that happens.
+
+ExposureInfo was not printed in CIFF directories due to an hidden
+'break' statement which caused the following code to be ignored.
+Also in CIFF, some directory entries would print with empty values
+in REPORT mode if no option was selected for output format of
+offsets.  Now defaults to decimal offset.
+
+=================================================================
+
+2.0.0:
+The following changes have been made since version 1.2.6:
+
+Support has been added for several "raw" camera file/image formats:
+    MRW,CIFF/CRW,X3F,RAF,JP2/JPEG2000,DNG,CR2,NEF,ORF,PEF,KDC,K25,
+and TIFF and JPEG support has been improved and generalized. In
+particular, TIFF routines have fewer expectations that interfere with
+handling of derived formats, and more information is extracted from
+JPEG markers.
+
+
+Image summaries have been improved and are now provided for all
+supported formats (not just TIFF). The new summary scheme avoids
+problems which occurred in TIFF summaries when IFD chains were longer
+than two IFDs. Summary entries are provided for all sub-images found in
+the file.
+
+
+Subtle and not-so-subtle improvements have been made in program output.
+All image sections (not just JPEG) are now reported "in place" with a
+brief hex dump of the beginning of data, and an option to dump more.
+More checks and alerts about "suspicious" file format elements are
+provided, e.g reports of JPEG_EOI found before the announced end of the
+section. LIST mode output now uses "long names" consisting of the
+entire list of parent sections of the current tag, separated by dots.
+This is more informative, and necessary to avoid duplicate names, but
+may require post-processing if the output is consumed by a script (most
+shells don't allow '.' in variable names). Short names in list mode are
+typically not useful (but suit yourself). Long names can be enabled in
+structural mode, if you like that sort of thing.
+
+
+Bug fixes:
+The program is now prepared to handle image summaries for chained
+TIFF IFDs of any length. Chained IFDs have always been handled, but
+the image summary mechanism was not prepared to handle chains longer
+than the 'usual' 2 IFDs. Thumbnails found in the first two IFDs would
+not be "forgotten" when processing later IFDs and would be reported
+repeatedly; confused data would appear in the summary. The mechanism
+would report only JPEG thumbnails and image blobs found in TIFF IFDs.
+The new summary mechanism displays and records all image sections
+found, in all supported file formats, and reports useful (and usually
+more accurate) summary information about each at the end of processing,
+including a count of images found and where they are located.
+
+
+Expanded MakerNote coverage:
+Much new data, particularly for Olympus (more tags, MakerNote subifds,
+etc), and Nikon (including preview subifd). Most of the new information
+is taken from Phil Harvey's 'ExifTool' web pages at
+   http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/index.html
+    
+
+Improved MakerNote handling:
+The program now defines "noteversions" for makers that use multiple
+versions, and will attempt to choose the correct version for
+unknown models. Canon CustomFunctions have been fixed so that D30
+CustomFunctions, previously displayed for all models containing
+CustomFunctions tags, are now displayed only for D30, with additional
+noteversions for some additional models. An unrecognized Canon model
+with the CustomFunctions tag will display only the contents, with no
+attempt at interpretation.
+
+New options:
+Several new options have been added (see the manual page);
+    -B len|a           print 'len' (or all) bytes of binary image
+                       data or failed JPEG data
+    -C [make]+[model]  print known makes and models
+    -n                 print filename on each line of output
+                       (toggle)
+    -pl                print long names (default for LIST mode)
+                       (toggle)
+    -t                 disable color by default if output is not
+                       to a tty (effective ONLY if set in
+                       EXIFPROBE_OPTIONS)
+    -O offset          start processing at 'offset'
+    -N noteversion     force use of MakerNote version 'noteversion'
+                       [a maker-specific number] 
+    -u                 print raw 'unicode' data.  Default output
+                       assumes data labeled as 'UNICODE' is really
+                       ascii in a bigger box, and prints just the
+                       low bytes.  This option enables raw printing
+                       of both bytes (no translations attempted).
+                       (toggle)
+
+
+Auxilliary programs:
+Some crude but sometimes useful auxiliary programs are now
+included with the distribution.
+    extract_section - extracts a section of a file given start offset
+                      and length, or start and end offset (which you
+                      can get from exifprobe output). An easy way to
+                      extract embedded JPEGs.
+    findjpeg        - scan a file for valid jpeg streams. VERY crude,
+                      and not useful on mostly binary files.
+    dump_section    - print a specified chunk of a file as bytes,
+                      shorts, longs, or short or long rationals.
+    probetohtml     - a simple shell script which uses 'sed' to convert
+                      color escape sequences to font color tags and
+                      generate an HTML file for the output of exifprobe.
+    reformat.sh     - script to reformat LIST output to change dots to
+                      underscores, remove comments, etc. to make the
+                      output acceptable to a shell for sourcing. The
+                      '-var' and '-export' options of exifgrep are no
+                      longer adequate for that purpose.
+
+    convert_rgb_to_tiff -  convert the RGB section of a Canon CR2 file to
+                           a 384x256 TIFF image that anybody can see.
+                           Uses ImageMagick 'convert' utility on extracted
+                           d.ata
+    convert_rgb_to_jpeg -  convert the RGB section of a Canon CR2 file to
+                           a 384x256 JPEG image that anybody can see.
+                           Uses ImageMagick 'convert' utility on extracted
+                           data.

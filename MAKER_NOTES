@@ -1,0 +1,38 @@
+# @(#) $Id: MAKER_NOTES,v 1.8 2005/07/05 17:02:24 alex Exp $
+
+Only  one camera  maker  (Foveon, for  the  Sigma/Foveon camera)  currently
+publishes the form  or interpretation of their makernote data;  the data is
+apparently recorded just to make the image file larger.
+
+Exifprobe's  identification and  interpretation  of tags  in MakerNotes  is
+based largely upon  information reverse-engineered by others  and posted to
+the Web  (see CREDITS). A  few items are  based upon examination  of images
+downloaded from  websites whose  operators are kind  enough to  make camera
+images available for download (including some rather *large* images).
+
+I recommend that you examine any  output for your camera to assure yourself
+that the  associations between  tag identifiers  and the  interpretation of
+the  associated values  is  reasonable  and correct.  Please  report to  me
+(dhh@virtual-cafe.com) any  corrections you  think should  be made  for any
+make or model of camera, and  any additional information you may deduce for
+any camera (or other device).
+
+It should be  noted that tag numbers, types, and  values shown by exifprobe
+will be correct  if shown...they are read directly from  the image file. It
+is  the "interpretation"  of  tags  and associated  values  which could  be
+suspect.
+
+The strategy used by exifprobe to  read MakerNotes does *not* depend upon a
+table of makes and models. The program  scans the offset given for the note
+to see if it can find an ID string, a TIFF header, and/or a valid IFD entry
+or two  at a  reasonable offset  and in either  byteorder. The  features it
+finds are recorded as a "scheme" which is used for reading and printing the
+MakerNote information.  If a valid IFD  is found the program  consults make
+and model information for the oddball variations used by some manufacturers
+(e.g. offsets relative to the start of the note or start of each entry) and
+to see if tagnames and value interpretations are available. If tagnames and
+interpretations are not available, the program will print the raw data with
+tagnames constructed from the tag number.
+
+
+dhh@virtual-cafe.com

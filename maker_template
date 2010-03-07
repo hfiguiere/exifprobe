@@ -1,0 +1,405 @@
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+/*          EXIFPROBE - TIFF/JPEG/EXIF image file probe               */
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+/* Copyright (C) 2002 by Duane H. Hesser. All rights reserved.        */
+/*                                                                    */
+/* See the file LICENSE.EXIFPROBE for terms of use.                   */
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+
+#ifndef WALL
+static char *ModuleId = "@(#) $Id: maker_template,v 1.4 2005/01/27 02:27:32 alex Exp $";
+#endif
+
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+/* THIS_MAKE camera maker-specific routines.                          */
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+/* Template file for maker-specific routines.                         */
+/* 1. Copy this to a file maker_XXX.c and edit as necessary.          */
+/*    a. Replace the string "THIS_MAKE" with the maker name.          */
+/*    b. assign numbers to make and model names as reqd in maker.h    */
+/*       (required iff more than one style of MakerNote exists across */
+/*       models)
+/*    c. edit THIS_MAKE_model_number to decode the MODEL, using the   */
+/*       SOFTWARE name as well if necessary.  The returned number     */
+/*       will be used to select the print and interpret routines for  */
+/*       the model.                                                   */
+/*    d. Edit print_THIS_MAKE_value() and                             */
+/*       print_THIS_MAKE_value_at_offset() to select the correct      */
+/*       print and interpret routines for each note style             */
+/*    e. code the specific print and interpret routines.              */
+/*    f. remove any unnecessary template material.                    */
+/* 2. Move the function prototypes to extern.h                        */
+/* 3. Edit print_maker.c to add a case for THIS_MAKER to              */
+/*    print_makervalue() and print_offset_makervalue().               */
+/* 4. Edit maker_generic.c to add a case for THIS_MAKER to            */
+/*    maker_number() and model_number().                              */
+/* 5. Edit maker_tagnames.c to add a case for THIS_MAKER to           */
+/*    maker_tagname().                                                */
+/* 6. Replace this comment with something appropriate.                */
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+
+#include <stdio.h>
+#include <string.h>
+#include "defs.h"
+#include "extern.h"
+#include "misc.h"
+#include "maker.h"
+
+/* Find the id number assigned to known THIS_MAKE camera models.      */
+/* This number is used to dispatch print and interpret routines       */
+/* apporopriate to the current image.                                 */
+
+int
+THIS_MAKE_model_number(char *model,char *software)
+{
+	int number = GENERIC;
+
+	switch(*model)
+	{
+		default:
+			number = GENERIC;
+			break;
+	}
+	return(number);
+}
+
+/* Dispatch a print routine based upon model                          */
+
+void
+print_THIS_MAKE_makervalue(struct ifd_entry *entry_ptr,int make, int model,
+					char *prefix)
+{
+
+	switch(model)
+	{
+		case MODEL1:
+			print_THIS_MAKE1_makervalue(entry_ptr,make,model,prefix);
+			THIS_MAKE1_interpret_value(entry_ptr);
+			break;
+		case MODEL2:
+		case MODEL3:
+			print_THIS_MAKE2_makervalue(entry_ptr,make,model,prefix);
+			THIS_MAKE2_interpret_value(entry_ptr);
+			break;
+		case GENERIC:
+		default:
+			print_THIS_MAKE1_makervalue(entry_ptr,make,model,prefix);
+			THIS_MAKE2_interpret_value(entry_ptr);
+			break;
+	}
+}
+
+/* Model-specific print routine for THIS_MAKE cameras. This routine is    */
+/* responsible for picking off any direct entry tags which are        */
+/* peculiar and will not be handled properly by print_value()         */
+/* (usually UNDEFINED values which fit in the 4-byte entry value). If */
+/* there are no such entries, this function simply calls              */
+/* print_value().                                                     */
+
+void
+print_THIS_MAKE1_makervalue(struct ifd_entry *entry_ptr,int make, int model,
+					char *prefix)
+{
+	if(entry_ptr)
+	{
+		switch(entry_ptr->tag) 
+		{
+			/* pick off values that need special handling in cases    */
+            /* here                                                   */
+			default:
+				print_value(entry_ptr,PREFIX);
+				break;
+		}
+	}
+}
+
+/* Dispatch a routine to decode and print offset values for THIS_MAKE   */
+/* cameras.                                                           */
+
+void
+print_THIS_MAKE_offset_makervalue(FILE *inptr,unsigned short byteorder,
+	struct ifd_entry *entry_ptr,unsigned long offset_ref,char *prefix,
+	int indent,int addrwidth,int make,int model,int at_offset)
+{
+
+	switch(model)
+	{
+		case MODEL1:
+			THIS_MAKE1_offset_makervalue(inptr,byteorder,entry_ptr,
+										offset_ref,prefix,indent,
+										addrwidth,make,model,int at_offset);
+			break;
+		case MODEL2:
+		default:
+			THIS_MAKE2_offset_makervalue(inptr,byteorder,entry_ptr,
+										offset_ref,prefix,indent,
+										addrwidth,make,model,int at_offset);
+			break;
+	}
+}
+
+/* Model-specific routine to print values found at an offset from the */
+/* IFD entry in THIS_MAKE makernotes.                                     */
+
+/* One of these may be supplied for each model if necessary           */
+
+void
+THIS_MAKE1_offset_makervalue(FILE *inptr,unsigned short byteorder,
+	struct ifd_entry *entry_ptr,unsigned long offset_ref,char *prefix,
+	int indent,int addrwidth,int make,int model,int at_offset)
+{
+	unsigned long value_offset;
+	unsigned long dumplength;
+	unsigned short marker;
+	char *nameoftag;
+
+	if(entry_ptr)
+	{
+		nameoftag = maker_tagname(entry_ptr->tag,make,model); 
+		value_offset = offset_ref + entry_ptr->value;
+
+		/* Pick off UNDEFINED tag types. The rest can be handled by   */
+        /* the generic routine.                                       */
+		switch(entry_ptr->tag)
+		{
+			case 0x0100: /* JPEG Thumbnail in TIFF MakerNote          */
+				print_tag_address(value_offset,indent,prefix,addrwidth);
+				putindent(SUBINDENT);
+				printf("Start of %s length %ld\n",nameoftag,entry_ptr->count);
+				marker = read_imagemarker(inptr,value_offset);
+				(void)process_jpeg_segments(inptr,value_offset,
+											marker,entry_ptr->count,indent+2,
+											addrwidth);
+				STARTCOLOR(MAKER_COLOR);
+				print_tag_address(value_offset + entry_ptr->count,indent,"-",
+											addrwidth);
+				putindent(SUBINDENT);
+				printf("End of %s",nameoftag);
+				/* make certain we're at the end unless 'inptr' bad   */
+				fseek(inptr,value_offset + entry_ptr->count,0);
+				break;
+			case 0x0e00: /* PrintIM (Epson Print Image matching)      */
+			case 0x0f00: /* Data                                      */
+				print_tag_address(value_offset,indent,prefix,addrwidth);
+				putindent(SUBINDENT);
+				printf("%s: length %lu",nameoftag,entry_ptr->count);
+				if(Max_undefined == 0)
+					printf(" (not dumped, use -U)");
+				else
+				{
+					if((Max_undefined == DUMPALL)
+						|| (Max_undefined > entry_ptr->count))
+							dumplength = entry_ptr->count;
+					else 
+						dumplength = Max_undefined;
+					putchar('\n');
+					hexdump(inptr,value_offset,entry_ptr->count,dumplength,12,
+								indent,SUBINDENT,addrwidth);
+				}
+				/* make certain we're at the end unless 'inptr' bad   */
+				fseek(inptr,value_offset + entry_ptr->count,0);
+				break;
+			default:
+				print_generic_offset_makervalue(inptr,byteorder,entry_ptr,
+										offset_ref,prefix,indent,
+										addrwidth,make,model,at_offset);
+				break;
+		}
+	}
+}
+
+void
+THIS_MAKE2_offset_makervalue(FILE *inptr,unsigned short byteorder,
+	struct ifd_entry *entry_ptr,unsigned long offset_ref,char *prefix,
+	int indent,int addrwidth,int make,int model,int at_offset)
+{
+	unsigned long value_offset;
+	unsigned long dumplength;
+	unsigned short marker;
+	char *nameoftag;
+
+	if(entry_ptr)
+	{
+		nameoftag = maker_tagname(entry_ptr->tag,make,model); 
+		value_offset = offset_ref + entry_ptr->value;
+		switch(entry_ptr->tag)
+		{
+			case 0x0100: /* JPEG Thumbnail in TIFF MakerNote, for     */
+				print_tag_address(value_offset,indent,prefix,addrwidth);
+				putindent(SUBINDENT);
+				printf("Start of %s length %ld\n",nameoftag,entry_ptr->count);
+				marker = read_imagemarker(inptr,value_offset);
+				(void)process_jpeg_segments(inptr,value_offset,
+											marker,entry_ptr->count,indent+2,
+											addrwidth);
+				STARTCOLOR(MAKER_COLOR);
+				print_tag_address(value_offset + entry_ptr->count,indent,"-",
+											addrwidth);
+				putindent(SUBINDENT);
+				printf("End of %s",nameoftag);
+				/* make certain we're at the end unless 'inptr' bad   */
+				fseek(inptr,value_offset + entry_ptr->count,0);
+				break;
+			case 0x0010: /* Data                                      */
+				print_tag_address(value_offset,indent,prefix,addrwidth);
+				putindent(SUBINDENT);
+				printf("%s: length %lu",nameoftag,entry_ptr->count);
+				if(Max_undefined == 0)
+					printf(" (not dumped, use -U)");
+				else
+				{
+					if((Max_undefined == DUMPALL)
+						|| (Max_undefined > entry_ptr->count))
+							dumplength = entry_ptr->count;
+					else 
+						dumplength = Max_undefined;
+					putchar('\n');
+					hexdump(inptr,value_offset,entry_ptr->count,dumplength,12,
+								indent,SUBINDENT,addrwidth);
+				}
+				/* make certain we're at the end          */
+				fseek(inptr,value_offset + entry_ptr->count,0);
+				break;
+			default:
+				print_generic_offset_makervalue(inptr,byteorder,entry_ptr,
+										offset_ref,prefix,indent,
+										addrwidth,make,model,int at_offset);
+				break;
+		}
+	}
+}
+
+char *
+maker_THIS_MAKE_tagname(unsigned short tag,int model)
+{
+	char *tagname = (char *)0;
+
+	/* Check specific models first                                    */
+	switch(model)
+	{
+		case MODEL1:
+			tagname = maker_THIS_MAKE1_tagname(tag,model);
+			break;
+		case MODEL2:
+			tagname = maker_THIS_MAKE2_tagname(tag,model);
+			break;
+		default:
+			/* Call a specific routine here, or leave it blank to     */
+            /* just call the generic tag maker.                       */
+			break;
+	}
+	return(tagname);
+}
+
+/* Tags for the older cameras.                                        */
+
+char *
+maker_THIS_MAKE1_tagname(unsigned short tag,int model)
+{
+	char *tagname = (char *)0;
+
+	switch(tag)
+	{
+		/* ###%%% be sure to change these                             */
+		case 0x0003: tagname = "Quality"; break;
+		case 0x0004: tagname = "Color Mode"; break;
+		case 0x0005: tagname = "Image Adjustment"; break;
+		case 0x0006: tagname = "ISO Setting"; break;
+		case 0x0007: tagname = "White Balance"; break;
+		case 0x0008: tagname = "Focus"; break;
+		case 0x000a: tagname = "Digital Zoom"; break;
+		case 0x000b: tagname = "LensConverter"; break;
+		case 0x0f00: tagname = "Data"; break;
+		case 0x0100: tagname = "JPEG Thumbnail"; break;
+			default: break;
+	}
+	return(tagname);
+}
+
+
+char *
+maker_THIS_MAKE2_tagname(unsigned short tag,int model)
+{
+	char *tagname = (char *)0;
+
+	switch(tag)
+	{
+		/* ###%%% be sure to change these                             */
+		case 0x0001: tagname = "Version"; break;
+		case 0x0002: tagname = "ISO Setting"; break;
+		case 0x0003: tagname = "Color Mode"; break;
+		case 0x0004: tagname = "Quality"; break;
+		case 0x0005: tagname = "White Balance"; break;
+		case 0x0006: tagname = "Image Sharpening"; break;
+		case 0x0007: tagname = "Focus Mode"; break;
+		case 0x0008: tagname = "Flash Setting"; break;
+		case 0x000f: tagname = "ISO Selection"; break;
+		case 0x0010: tagname = "Data"; break;
+		case 0x0080: tagname = "Image Adjustment"; break;
+		case 0x0082: tagname = "Adapter"; break;
+		case 0x0085: tagname = "Manual Focus Distance"; break;
+		case 0x0086: tagname = "Digital Zoom"; break;
+		case 0x0088: tagname = "Auto Focus Position"; break;
+		case 0x0e00: tagname = "PrintIM Data"; break;
+		case 0x0100: tagname = "JPEG Thumbnail"; break;
+		default: break;
+	}
+	return(tagname);
+}
+
+void
+THIS_MAKE1_interpret_value(struct ifd_entry *entry_ptr)
+{
+	switch(entry_ptr->tag)
+	{
+		case 0xQUALITY:	/* Quality */
+			switch(entry_ptr->value)
+			{
+				default: printred(" [???]",MAKER_COLOR); break;
+			}
+			break;
+		case 0xCOLOR:	/* Color Mode */
+			if(entry_ptr->value == COLOR)
+				printf(" [color]");
+			else if(entry_ptr->value == MONOCHROME)
+				printf(" [monochrome]");
+			else
+				printred(" [???]",MAKER_COLOR);
+			break;
+		case 0xADJUST:	/* Image Adjustment */
+			switch(entry_ptr->value)
+			{
+				default:
+					printred(" [???]",MAKER_COLOR);
+					break;
+			}
+			break;
+		default:
+			break;
+	}
+}
+
+void 
+THIS_MAKE2_interpret_value(struct ifd_entry *entry_ptr)
+{
+	
+	switch(entry_ptr->tag)
+	{
+			case 0x000b:
+			case 0x000d:
+			case 0x000e:
+			case 0x0011:
+			case 0x0083:
+			case 0x0087:
+			case 0x0089:
+			case 0x008a:
+			case 0x008b:
+			case 0x0092:
+			case 0x0094:
+				printred(" [???]",MAKER_COLOR);
+				break;
+			default:
+				printred(" [???]",MAKER_COLOR);
+				break;
+	}
+}

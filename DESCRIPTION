@@ -1,0 +1,26 @@
+Exifprobe reads image files produced by digital cameras (including
+several so-called "raw" file formats) and reports the structure of
+the files and the auxilliary data and metadata contained within them.
+In addition to TIFF, JPEG, and EXIF, the program understands several
+formats which may contain "raw" camera data, including MRW, CIFF/CRW,
+JP2/JPEG2000, RAF, and X3F, as well as most most TIFF-derived "raw"
+formats, including DNG, ORF, CR2, NEF, K25/KDC/DCR, and PEF.
+
+MakerNote sections found in Exif IFDs are reported and expanded if the  
+note is in a semblance of TIFF IFD format. Information which has been   
+published on the internet is used to interpret notes where possible.    
+
+The default output attempts to describe the structure of the file,      
+showing location, size and content of auxilliary data, metadata, and    
+image sections. Multiple images contained in a single file are noted    
+(and JPEG sub-image markers examined for useful data). A summary of     
+images found is printed at the end of output for each file.
+
+Many options are provided for detail control of output format.          
+For convenience, two pre-set formats (in addition to the default        
+'structural' format) are provided: a "report" format (which shows       
+"structure" of TIFF ifds, but with values printed inline), and a        
+"list" format which eliminates structural elements and presents data    
+in a human (or script) readable format for possible use in gallery      
+applications.                                                           
+

@@ -1,0 +1,39 @@
+Beginning with version 1.2.6, exifprobe reports the structure of
+Print Image Matching sections, according to information provided by
+evan@ozhiker.com on the web page at
+
+http://www.ozhiker.com/electronics/pjmt/jpeg_info/pim.html
+
+The meaning of the PIM tags and the interpretation of the 4 bytes
+of data in each entry are not known. Exifprobe prints the tags by
+hexadecimal number, and prints the data in two formats: a "hex dump"
+of each data entry, followed by the hex and decimal values of the data
+interpreted as unsigned long integers in the prevailing byteorder of the
+Exif data.
+
+Print IM is a feature of Epson Printers, supported by several camera
+manufacturers. The PrintIM section is included in either the first TIFF
+IFD or in the MakerNote, or both. The section records a "profile"
+indicating certain transformations which the manufacturer finds will
+improve the image presentation on a PrintIM-enabled printer. Epson
+provides a FAQ at
+
+http://www.printimagematching.com/faq4.php
+
+which better describes Print Image Matching.
+
+According to the FAQ, the values provided in the PrintIM section may
+include:
+    Gamma Level
+    Color Space
+    Color Balance
+    Contrast
+    Brightness
+    Sharpness
+    Saturation
+    Shadow
+    Highlight
+
+PIM version II also may include
+    Noise Reduction
+    Custom Scene setting

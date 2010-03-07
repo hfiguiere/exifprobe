@@ -1,0 +1,9 @@
+#!/bin/sh
+# Converts the RGB blob extracted from a Canon CR2 file to a displayable JPEG image.
+# Extract the section with 'exifgrep Ifd2.Strip filename', then
+# 'extract_section @StripOffsets:StripByteCounts'
+# Rename the file to have an 'rgb' extension, then run this using the basename of the
+# rgb file as argument.
+# ...or write a better script to automate the process.
+
+convert -verbose -size 384x256 -depth 8 -gamma 2.2 -density 72x72 $1.rgb'[384x256]' $1.jpg

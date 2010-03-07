@@ -1,0 +1,249 @@
+The full list of "known" camera models is available using the
+'-C+' option of exifprobe (see the manual page for details)
+and is included below for reference.
+
+Most of the images used in testing exifprobe are from the following sites:
+    http://www.imaging-resource.com/
+    http://www.dpreview.com/
+    http://www.steves-digicams.com/
+    http://www.exif.org/samples.html
+    http://www.jojotsch.de/downloads/jojothumb/
+    http://www.casio.co.jp/QV/Info/
+    http://drewnoakes.com/code/exif/exifImages/
+    http://www.pbase.com/sigmasd9/x3f_raw_files
+
+
+The following model appears as a 'Type' in an APP12 section:
+    Agfa Gevaert model SR84
+
+The following models are due to user reports, but I do not have the
+specific "Model" strings for the cameras, so they are not included
+in the list produced by '-C+'.
+
+Canon model Canon PowerShot A40
+OLYMPUS OPTICAL CO.,LTD model C740UZ
+FUJIFILM model 1300
+Motorola Model A920 (camera phone, JFIF only)
+
+Note that it is not essential that a camera model is recognized in
+order for exifprobe to produce useful output. In some cases MakerNote
+recognition or expansion may not succeed for unrecognized models.
+
+=-=-==-=-==-=-==-=-==-=-==-=-==-=-==-=-==-=-==-=-==-=-=--=-=-=-=-=-=
+The numbers in square brackets following 'makes' in the list are the
+numbers assigned internally to that make by exifprobe.  The numbers
+in square brackets following 'models' are the model number and 
+'noteversion' assigned internally to that model.
+
+These numbers will not normally be of particular interest, but do
+serve to indicate the number of noteversions supported for a model,
+and can be of use to advanced users.
+
+The names given are the precise strings included in the 'Make' and
+'Model' tags of TIFF files and the included TIFF IFDs of other
+image file formats.  Some file formats do not include TIFF or EXIF
+sections.  X3F files use a "property list" containing "CAMMANUF"
+and "CAMMODEL" properties.  JP2 files do not normally contain
+this information in a specific location, although some files do
+contain TIFF IFDs embedded in "uuid" boxes, and other boxes are
+available which could be used to identify make and model.  No
+camera or device I know of yet produces JP2, so...
+=-=-==-=-==-=-==-=-==-=-==-=-==-=-==-=-==-=-==-=-==-=-=--=-=-=-=-=-=
+Camera Makes:
+	Agfa Gevaert                     [1]
+		SR841                            	[ 1,1]
+	Asahi Optical Co.,Ltd            [2]
+		PENTAX Optio 330                 	[ 1,1]
+		PENTAX Optio330RS                	[ 2,2]
+		PENTAX Optio 430                 	[ 3,1]
+		PENTAX Optio430RS                	[ 4,2]
+		PENTAX Optio 550                 	[ 5,3]
+		PENTAX Optio 750Z                	[ 6,3]
+		PENTAX Optio S                   	[ 7,3]
+		PENTAX Optio S5i                 	[ 8,3]
+		PENTAX *ist D                    	[ 9,3]
+		PENTAX *ist DS                   	[10,3]
+	Canon                            [3]
+		Canon DIGITAL IXUS               	[ 1,1]
+		Canon EOS-1D                     	[ 2,5]
+		Canon EOS-1D Mark II             	[ 3,5]
+		Canon EOS-1DS                    	[ 4,5]
+		Canon EOS-1Ds Mark II            	[ 5,5]
+		Canon EOS 10D                    	[ 6,3]
+		Canon EOS 20D                    	[ 7,4]
+		Canon EOS D30                    	[ 8,2]
+		Canon EOS D60                    	[ 9,1]
+		Canon EOS 350                    	[10,1]
+		Canon EOS DIGITAL REBEL          	[11,1]
+		Canon PowerShot A400             	[13,1]
+		Canon PowerShot A5               	[14,1]
+		Canon PowerShot G2               	[15,1]
+		Canon PowerShot Pro1             	[16,1]
+		Canon PowerShot S70              	[17,1]
+	CASIO                            [4]
+		QV-2000UX                        	[ 1,1]
+		QV-3000EX                        	[ 2,1]
+		QV-4000                          	[ 3,1]
+		QV-8000SX                        	[ 4,1]
+		QV-R51                           	[ 5,2]
+		EX-P505                          	[ 6,2]
+		EX-P600                          	[ 7,2]
+		EX-P700                          	[ 8,2]
+		EX-S100                          	[ 9,2]
+		EX-Z55                           	[10,2]
+		GV-20                            	[11,2]
+	Eastman Kodak Company            [5]
+		DC200 Zoom (V05.00)              	[ 1,0]
+		DC210 Zoom (V05.00)              	[ 2,0]
+		DCS720X                          	[ 3,0]
+		DCS760C                          	[ 4,0]
+		Kodak DC120 ZOOM Digital Camera  	[ 5,0]
+		Kodak DC240 ZOOM Digital Camera  	[ 6,0]
+		Kodak DC4800 ZOOM Digital Camera 	[ 7,0]
+		KODAK DC25 DIGITAL CAMERA        	[ 8,0]
+		KODAK LS443 ZOOM DIGITAL CAMERA  	[ 9,0]
+		Kodak Digital Science DC50 Zoom  	[10,0]
+	Fujifilm                         [6]
+		DX-10                            	[ 1,1]
+		FUJIFILM FinePixA204             	[ 2,1]
+		FinePix40i                       	[ 3,1]
+		FinePix4900ZOOM                  	[ 4,1]
+		FinePix E550                     	[ 5,1]
+		FinePix F601 ZOOM                	[ 6,1]
+		FinePixS1Pro                     	[ 7,1]
+		FinePixS2Pro                     	[ 8,1]
+		FinePix S20Pro                   	[ 9,1]
+		FinePix S5000                    	[10,1]
+		MX-1700ZOOM                      	[11,1]
+		SP-2000                          	[12,0]
+	Hewlett-Packard                  [7]
+		HP PhotoSmart C912               	[ 1,0]
+		HP PhotoSmart R707               	[ 2,0]
+	Konica Minolta Camera            [8]
+		DiMAGE 5                         	[ 1,1]
+		DiMAGE 7                         	[ 2,1]
+		DiMAGE 7Hi                       	[ 3,1]
+		DiMAGE 7i                        	[ 4,1]
+		DiMAGE A1                        	[ 5,1]
+		DiMAGE A2                        	[ 6,1]
+		DiMAGE A200                      	[ 7,1]
+		DiMAGE EX                        	[ 8,1]
+		DiMAGE F100                      	[ 9,1]
+		DiMAGE F200                      	[10,1]
+		DiMAGE F300                      	[11,1]
+		DiMAGE S404                      	[12,1]
+		DiMAGE S414                      	[13,1]
+		DiMAGE X                         	[14,1]
+		DiMAGE X20                       	[15,1]
+		DYNAX 7D                         	[16,1]
+		MAXXUM 7D                        	[17,1]
+	Konica Corporation               [9]
+		Konica Digital Camera Q-M100     	[ 1,1]
+		Konica Digital Camera KD-400Z    	[ 2,1]
+	Kyocera                          [10]
+		FC-S3                            	[ 1,1]
+		Finecam S5                       	[ 2,1]
+	Leica                            [11]
+		DIGILUX 2                        	[ 1,0]
+		digilux 4.3                      	[ 2,1]
+		R9 - Digital Back DMR            	[ 3,0]
+	Minolta                          [8]
+		DiMAGE 5                         	[ 1,1]
+		DiMAGE 7                         	[ 2,1]
+		DiMAGE 7Hi                       	[ 3,1]
+		DiMAGE 7i                        	[ 4,1]
+		DiMAGE A1                        	[ 5,1]
+		DiMAGE A2                        	[ 6,1]
+		DiMAGE A200                      	[ 7,1]
+		DiMAGE EX                        	[ 8,1]
+		DiMAGE F100                      	[ 9,1]
+		DiMAGE F200                      	[10,1]
+		DiMAGE F300                      	[11,1]
+		DiMAGE S404                      	[12,1]
+		DiMAGE S414                      	[13,1]
+		DiMAGE X                         	[14,1]
+		DiMAGE X20                       	[15,1]
+		DYNAX 7D                         	[16,1]
+		MAXXUM 7D                        	[17,1]
+	Panasonic                        [14]
+		DMC-FX7                          	[ 1,1]
+		DMC-FZ1                          	[ 2,1]
+		DMC-FZ2                          	[ 3,1]
+		DMC-FZ3                          	[ 4,1]
+		DMC-FZ10                         	[ 5,1]
+		DMC-FZ15                         	[ 6,1]
+		DMC-FZ20                         	[ 7,1]
+		DMC-LC5                          	[ 8,1]
+		DMC-LC33                         	[ 9,1]
+		DMC-LC40                         	[10,1]
+		DMC-LC43                         	[11,1]
+	Pentax Corporation               [15]
+		PENTAX Optio 330                 	[ 1,1]
+		PENTAX Optio330RS                	[ 2,2]
+		PENTAX Optio 430                 	[ 3,1]
+		PENTAX Optio430RS                	[ 4,2]
+		PENTAX Optio 550                 	[ 5,3]
+		PENTAX Optio 750Z                	[ 6,3]
+		PENTAX Optio S                   	[ 7,3]
+		PENTAX Optio S5i                 	[ 8,3]
+		PENTAX *ist D                    	[ 9,3]
+		PENTAX *ist DS                   	[10,3]
+	Nikon Corporation                [12]
+		E700                             	[ 1,1]
+		E775                             	[ 2,2]
+		E800                             	[ 3,1]
+		E885                             	[ 4,2]
+		E900                             	[ 5,1]
+		E950                             	[ 6,1]
+		E990                             	[ 7,2]
+		E995                             	[ 8,2]
+		E3700                            	[ 9,2]
+		E5000                            	[10,2]
+		E5200                            	[11,2]
+		E5700                            	[12,2]
+		E8700                            	[13,2]
+		E8800                            	[14,2]
+		NIKON D1                         	[15,2]
+		NIKON D1X                        	[16,2]
+		NIKON D70                        	[17,2]
+		NIKON D100                       	[18,2]
+		NIKON D2H                        	[19,2]
+		NIKON D2X                        	[20,2]
+		SQ                               	[21,2]
+	Olympus Optical Co.,Ltd          [13]
+		C700UZ                           	[ 1,1]
+		C70Z,C7000Z                      	[ 2,1]
+		C960Z                            	[ 3,1]
+		C2040Z                           	[ 4,1]
+		C2500L                           	[ 5,1]
+		C3030Z                           	[ 6,1]
+		C3040Z                           	[ 7,1]
+		C8080WZ                          	[ 8,1]
+		E-1                              	[ 9,1]
+		E-300                            	[10,1]
+		u40D,S500,uD500                  	[11,1]
+	Ricoh                            [16]
+		RDC-5300                         	[ 1,0]
+		RDC-6000                         	[ 2,0]
+	Sanyo Electric Co.,Ltd.          [17]
+		SR6                              	[ 1,1]
+		SX113                            	[ 2,1]
+		SX215                            	[ 3,1]
+	Seiko Epson Corp.                [18]
+		PhotoPC 850Z                     	[ 1,1]
+		PhotoPC 3000Z                    	[ 2,1]
+		PhotoPC 3100Z                    	[ 3,1]
+		L-500V                           	[ 4,1]
+	Sigma                            [19]
+		SIGMA SD9                        	[ 1,1]
+		SIGMA SD10                       	[ 2,1]
+	Sony                             [20]
+		CYBERSHOT                        	[ 1,1]
+		DIGITALMAVICA                    	[ 2,1]
+		DSC-D700                         	[ 3,1]
+		DSC-V3                           	[ 4,1]
+		MAVICA                           	[ 5,1]
+	Toshiba                          [21]
+		PDR-3300                         	[ 1,1]
+	Traveler Optical Co,Ltd          [22]
+		SX330Z                           	[ 1,0]

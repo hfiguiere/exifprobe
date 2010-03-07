@@ -1,0 +1,231 @@
+#!/bin/sh
+# @(#) $Id: exifgrep,v 1.11 2005/07/02 13:10:03 alex Exp $
+
+# Run 'egrep' on the output of exifprobe -L, massaging the output a la
+# 'list-photo'.  Accepts the -var, -export, -num, and '-' options of
+# list_photo; all other options are passed to egrep.
+
+usage()
+{
+    echo "Usage: exifgrep [-var|-export] [-num] [-r] [-t] [-n] [-c] [egrep-options] egrep-pattern [NOT egrep-pattern] imagefilename[s]" 1>&2
+    exit 1
+}
+
+
+# Create the output format, choosing numerical or "interpreted" values
+# from the exifprobe output lines, and stripping unwanted spaces for
+# "variable" format (while quoting multi-word values).
+
+format()
+{
+    filename=
+    vars="var nequals nvalue iequals value remainder"
+    case "${nameopt}" in
+        "-n") vars="filename var nequals nvalue iequals value remainder" ;;
+    esac
+
+    while read $vars
+    do
+        case "$filename" in
+            "#")  continue ;;
+            "#"*)  continue; ;;
+            *"#")  continue ;;
+        esac
+        case ${var} in
+            "#")  continue ;;
+            "#"*)  continue; ;;
+            *"#")  continue ;;
+        esac
+        if test 0$dovar -ne 0
+        then
+            if test ${donum} -eq 1
+            then
+                case ${nvalue} in
+                     [0-9]*) echo -n "${export}${var}=${nvalue}" ;;
+                          *) quote ${var} ${nvalue} ${iequals} ${value} ${remainder};;
+                esac
+            else
+                case "${iequals}" in
+                    "") quote ${var} ${nvalue}${value}${remainder} ;;
+                     =) quote ${var} ${value} ${remainder} ;;
+                  APEX) quote ${var} ${remainder} ;;
+                     *) quote ${var} ${nvalue} ${iequals} ${value} ${remainder} ;;
+                esac
+            fi
+        elif test ${donum} -eq 1
+        then
+            case ${nvalue} in
+                "'"*) echo -n "${var}=${nvalue}"
+                        case "${iequals}" in
+                            "") ;;
+                             *) echo -n " ${iequals} ${value} ${remainder}" ;;
+                        esac
+                        ;;
+                 *) case "${var}" in
+                        "#") ;;
+                         *) echo -n "${var}=${nvalue}" ;;
+                    esac
+                    ;;
+            esac
+        else
+            echo -n  $var $nequals $nvalue $iequals $value $remainder
+        fi
+        case "${filename}" in
+            "") echo ;;
+            *) echo "    # ${filename}" ;;
+        esac
+    done
+}
+
+
+# On output, place double-quotes around multi-word values which
+# are not already quoted. This is necessary for 'variable' format.
+# Do not include "commented" material in quoted phrase.
+
+quote()
+{
+    local inquote
+
+    inquote=0
+    case $# in
+        0) ;;
+        1) echo -n "${export}$1=" ;;
+        2) echo -n "${export}$1=$2" ;;
+        *) case $1 in
+            \#*) echo -n "$1" ;;
+              *) echo -n "${export}$1"= ;;
+           esac
+           shift
+           while test $# -gt 0
+           do
+               case $1 in
+                \'*) echo -n $*; break ;;
+                \#*) case $inquote in
+                        1) echo -n "' " ;;
+                     esac
+                     inquote=0
+                     echo -n "$*"
+                     break
+                     ;;
+                  *) case $inquote in
+                        0) echo -n "'"; inquote=1 ;;
+                     esac
+                     echo -n "$1"
+                     shift
+                     ;;
+               esac
+           done
+           case $inquote in
+                1) echo -n "'" ;;
+           esac
+           ;;
+    esac
+}
+
+exifgrep_imagefind()
+{
+    local dir
+
+    dir="$*"
+    find ${dir:="."} \
+         \( \
+           -iname "*.tiff" -o -iname "*.tiff" -o -iname "*.tiff.Z"  \
+        -o -iname "*.tif" -o -iname "*.tif" -o -iname "*.tif.Z"  \
+        -o -iname "*.jpeg" -o -iname "*.jpeg.gz" -o -iname "*.jpeg.Z"  \
+        -o -iname "*.jpg" -o -iname "*.jpg.gz" -o -iname "*.jpg.Z"  \
+        -o -iname "*.jpe" -o -iname "*.jpe.gz" -o -iname "*.jpe.Z"  \
+        -o -iname "*.kqp" -o -iname "*.kqp.gz" -o -iname "*.kqp.Z" \
+        -o -iname "*.mrw" -o -iname "*.mrw.gz" -o -iname "*.mrw.Z"  \
+        -o -iname "*.nef" -o -iname "*.nef.gz" -o -iname "*.nef.Z"  \
+        -o -iname "*.orf" -o -iname "*.orf.gz" -o -iname "*.orf.Z"  \
+        -o -iname "*.pef" -o -iname "*.pef.gz" -o -iname "*.pef.Z"  \
+        -o -iname "*.x3f" -o -iname "*.x3f.gz" -o -iname "*.x3f.Z"  \
+        -o -iname "*.dng" -o -iname "*.dng.gz" -o -iname "*.dng.Z"  \
+        -o -iname "*.erf" -o -iname "*.erf.gz" -o -iname "*.erf.Z"  \
+        -o -iname "*.raf" -o -iname "*.raf.gz" -o -iname "*.raf.Z"  \
+        -o -iname "*.cr2" -o -iname "*.cr2.gz" -o -iname "*.cr2.Z"  \
+        -o -iname "*.crw" -o -iname "*.crw.gz" -o -iname "*.crw.Z"  \
+        -o -iname "*.jp2" -o -iname "*.jp2.gz" -o -iname "*.jp2.Z"  \
+        -o -iname "*.k25" -o -iname "*.k25.gz" -o -iname "*.k25.Z"  \
+        -o -iname "*.kdc" -o -iname "*.kdc.gz" -o -iname "*.kdc.Z"  \
+        \) -print 
+}
+
+: PROBE=${PROBE:=exifprobe}
+# Gather options first.  This is kind of wierd.
+dovar=0
+donum=0
+recursisve=0
+
+export=
+egrep_options=
+vgrep_options=
+pattern=
+notpattern=
+nameopt=
+tagopt=
+coloropt=
+
+while test $# -ge 1
+do
+    case $1 in
+        -var) dovar=1; shift ;;
+        -num) donum=1; shift ;;
+          -c) coloropt="-c" ; shift ;; 
+          -n) nameopt="-n"; shift ;;   # may need this if reading from stdin
+          -r) recursive=1; shift ;;
+          -t) tagopt="-enN" ; shift ;; 
+    -export*) export="export "; dovar=1; shift ;;
+          -h) usage ;;
+          -*) egrep_options="$egrep_options $1"; shift ;;
+         NOT) case "$2" in
+                -f) notpattern="-f $3"; shift; shift; shift; break ;;
+                 *) notpattern="$2"; shift; shift; break ;;
+              esac
+              ;;
+           *) pattern=$1; shift
+              case $1 in
+                NOT) case "$2" in
+                        -f) notpattern="-f $3"; shift; shift; shift; break ;;
+                         *) notpattern="$2"; shift; shift; break ;;
+                     esac
+                     ;;
+                  *) break ;;
+              esac
+              ;;
+    esac
+done
+
+if test $# -lt 1 -a "X${pattern}${notpattern}" = "X"
+then
+    usage
+fi
+
+# This should probably be modified somehow to use xargs.
+case "${recursive}" in
+    1)  args=$( exifgrep_imagefind $* )
+        set -- ${args}
+        ;;
+esac
+
+# All variables are global.
+# If there are no filenames, read from stdin, which is expected to be
+# exifprobe -L output.
+
+case $# in
+     0) egrep ${egrep_options} ${pattern} | format
+        ;;
+     *) case $# in
+            1) ;;
+            *) nameopt="-n" ;;  # Use names if more than one file
+        esac
+        case "${notpattern}" in
+            "") ${PROBE} -L ${coloropt} ${nameopt} ${tagopt} $* | egrep ${egrep_options} ${pattern} | format ;;
+             *) case "${pattern}" in
+                    "") ${PROBE} -L ${coloropt} ${nameopt} ${tagopt} $* | egrep ${egrep_options} -v ${notpattern} | format ;;
+                     *) ${PROBE} -L ${coloropt} ${nameopt} ${tagopt} $* | egrep ${egrep_options} ${pattern} | egrep -v ${notpattern} | format ;;
+                esac
+                ;;
+        esac
+        ;;
+esac

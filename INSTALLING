@@ -1,0 +1,61 @@
+# @(#) $Id: INSTALLING,v 1.8 2005/06/30 17:51:42 alex Exp $
+
+The program should compile on any reasonably modern Unix or Linux
+system, but has been tested only on FreeBSD and RedHat Linux. No
+extra libraries are required.  If you compile on other systems,
+please let me know.  I have deliberately attempted to avoid the
+need for massive "autoconfuse" scripts, but time will tell.
+
+For FreeBSD and Linux, it should be sufficient to just type 'make'
+unless you wish to change defaults for CFLAGS (see below). On
+some systems you may need 'gmake' (or edit the PREFIX line to
+something your make will accept).
+
+If your system does not have a system include file "endian.h"
+which defines BYTE_ORDER (or __BYTE_ORDER) as LITTLE-something or
+BIG-something, you may need to fix the file "makebyteorder.sh",
+or manually create a file "byteorder.h" in the distribution 
+directory.  If your machine's native byte order is big-endian,
+add the single line:
+
+#define NATIVE_BYTEORDER_BIGENDIAN
+
+The sources assume little-endian unless told otherwise,
+so an empty "byteorder.h" is sufficient in that case.
+
+Check CFLAGS:
+    If your system includes provide the type 'uint32_t' in types.h
+    but not 'u_int32_t' (Solaris), uncomment the line which defines
+    uint32_t (or add the definition to CFLAGS). BSD and Linux define
+    u_int32_t in sys/types.h, which is where this code expects it.
+
+    If you do NOT want support for ANSI color sequences to emphasize
+    certain sections of the output, remove
+        -DCOLOR
+    Alternatively, if you want color but find my selections bilious,
+    you can change a few defines in defs.h.  The colors currently
+    used are intended to be used with a light background; I don't
+    recommend them with 'reverse-video' or otherwise dark backgrounds.
+
+    If you want color compiled in, but don't want it by default (the
+    '-c' flag toggles color if support is compiled in) edit defs.h to
+    remove the PRINT_COLOR bit from PRINT_DEFAULTS.
+
+Check PREFIX, BINDIR and MANDIR: set to the directories where the executable
+    and manual page should be copied.  Normally, you will only need to set
+    PREFIX.
+
+Then do
+    (optional) make depend (requires the executable 'makedepend')
+    make 
+
+and when you're ready
+    make install
+
+The files in the 'aux" directory must be compiled and/or installed
+manually.  There is a simple Makefile for the C programs.  You may
+want to modify the scripts for your own purposes.
+
+Duane Hesser
+dhh@virtual-cafe.com
+http://virtual-cafe.com/~dhh/tools.d/software.html
