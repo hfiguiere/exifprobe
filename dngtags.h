@@ -64,4 +64,43 @@
 #define DNGTAG_CurrentICCProfile            0xC691	/*	50833	*/
 #define DNGTAG_CurrentPreProfileMatrix      0xC692	/*	50834	*/
 
+/* DNG 1.2.0 */
+
+#define DNGTAG_ColorimetricReference        0xC6BF	/*	50879	*/
+#define DNGTAG_CameraCalibrationSignature   0xC6F3	/*	50931	*/
+#define DNGTAG_ProfileCalibrationSignature  0xC6F4	/*	50932	*/
+#define DNGTAG_ExtraCameraProfiles          0xC6F5	/*	50933	*/
+#define DNGTAG_AsShotProfileName            0xC6F6	/*	50934	*/
+#define DNGTAG_NoiseReductionApplied        0xC6F7	/*	50935	*/
+#define DNGTAG_ProfileName                  0xC6F8	/*	50936	*/
+#define DNGTAG_ProfileHueSatMapDims         0xC6F9	/*	50937	*/
+#define DNGTAG_ProfileHueSatMapData1        0xC6FA	/*	50938	*/
+#define DNGTAG_ProfileHueSatMapData2        0xC6FB	/*	50939	*/
+#define DNGTAG_ProfileToneCurve             0xC6FC	/*	50940	*/
+#define DNGTAG_ProfileEmbedPolicy           0xC6FD	/*	50941	*/
+#define DNGTAG_ProfileCopyright             0xC6FE	/*	50942	*/
+
+#define DNGTAG_ForwardMatrix1               0xC714	/*	50964	*/
+#define DNGTAG_ForwardMatrix2               0xC715	/*	50965	*/
+#define DNGTAG_PreviewApplicationName       0xC716	/*	50966	*/
+#define DNGTAG_PreviewApplicationVersion    0xC717	/*	50967	*/
+#define DNGTAG_PreviewSettingsName          0xC718	/*	50968	*/
+#define DNGTAG_PreviewPreviewSettingsDigest 0xC719	/*	50969	*/
+#define DNGTAG_PreviewPreviewColorSpace     0xC71A	/*	50970	*/
+#define DNGTAG_PreviewPreviewDateTime       0xC71B	/*	50971	*/
+#define DNGTAG_RawImageDigest               0xC71C	/*	50972	*/
+#define DNGTAG_OriginalRawFileDigest        0xC71D	/*	50973	*/
+#define DNGTAG_SubTileBlockSize             0xC71E	/*	50974	*/
+#define DNGTAG_RowInterleaveFactor          0xC71F	/*	50975	*/
+#define DNGTAG_ProfileLookTableDims         0xC725	/*	50981	*/
+#define DNGTAG_ProfileLookTableData         0xC726	/*	50982	*/
+
+
+/* DNG 1.3.0 */
+
+#define DNGTAG_OpcodeList1                  0xC740      /*      51008   */
+#define DNGTAG_OpcodeList2                  0xC741      /*      51009   */
+#define DNGTAG_OpcodeList3                  0xC74E      /*      51022   */
+#define DNGTAG_NoiseProfile                 0xC761      /*      51041   */
+
 #endif /* DNGTAGS_INCLUDED */

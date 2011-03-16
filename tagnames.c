@@ -345,6 +345,44 @@ tagname(unsigned short tag)
 /* 50833 */ case 0xC691: tagname = "CurrentICCProfile"; break;          /* DNG */
 /* 50834 */ case 0xC692: tagname = "CurrentPreProfileMatrix"; break;    /* DNG */
 
+/* 50879 */ case 0xC6BF: tagname = "ColorimetricReference"; break;      /* DNG 1.2 */
+
+/* 50931 */ case 0xC6F3: tagname = "CameraCalibrationSignature"; break; /* DNG 1.2 */
+/* 50932 */ case 0xC6F4: tagname = "ProfileCalibrationSignature"; break;/* DNG 1.2 */
+/* 50933 */ case 0xC6F5: tagname = "ExtraCameraProfiles"; break;        /* DNG 1.2 */
+/* 50934 */ case 0xC6F6: tagname = "AsShotProfileName"; break;          /* DNG 1.2 */
+/* 50935 */ case 0xC6F7: tagname = "NoiseReductionApplied"; break;      /* DNG 1.2 */
+/* 50936 */ case 0xC6F8: tagname = "ProfileName"; break;                /* DNG 1.2 */
+/* 50937 */ case 0xC6F9: tagname = "ProfileHueSatMapDims"; break;       /* DNG 1.2 */
+/* 50938 */ case 0xC6FA: tagname = "ProfileHueSatMapData1"; break;      /* DNG 1.2 */
+/* 50939 */ case 0xC6FB: tagname = "ProfileHueSatMapData2"; break;      /* DNG 1.2 */
+/* 50940 */ case 0xC6FC: tagname = "ProfileToneCurve"; break;           /* DNG 1.2 */
+/* 50941 */ case 0xC6FD: tagname = "ProfileEmbedPolicy"; break;         /* DNG 1.2 */
+/* 50942 */ case 0xC6FE: tagname = "ProfileCopyright"; break;           /* DNG 1.2 */
+
+/* 50964 */ case 0xC714: tagname = "ForwardMatrix1"; break;             /* DNG 1.2 */
+/* 50965 */ case 0xC715: tagname = "ForwardMatrix2"; break;             /* DNG 1.2 */
+/* 50966 */ case 0xC716: tagname = "PreviewApplicationName"; break;     /* DNG 1.2 */
+/* 50967 */ case 0xC717: tagname = "PreviewApplicationVersion"; break;  /* DNG 1.2 */
+/* 50968 */ case 0xC718: tagname = "PreviewSettingsName"; break;        /* DNG 1.2 */
+/* 50969 */ case 0xC719: tagname = "PreviewSettingsDigest"; break;      /* DNG 1.2 */
+/* 50970 */ case 0xC71A: tagname = "PreviewColorSpace"; break;          /* DNG 1.2 */
+/* 50971 */ case 0xC71B: tagname = "PreviewDateTime"; break;            /* DNG 1.2 */
+/* 50972 */ case 0xC71C: tagname = "RawImageDigest"; break;             /* DNG 1.2 */
+/* 50973 */ case 0xC71D: tagname = "OriginalRawFileDigest"; break;      /* DNG 1.2 */
+/* 50974 */ case 0xC71E: tagname = "SubTileBlockSize"; break;           /* DNG 1.2 */
+/* 50975 */ case 0xC71F: tagname = "RowInterleaveFactor"; break;        /* DNG 1.2 */
+
+/* 50981 */ case 0xC725: tagname = "ProfileLookTableDims"; break;       /* DNG 1.2 */
+/* 50982 */ case 0xC726: tagname = "ProfileLookTableData"; break;       /* DNG 1.2 */
+
+/* 51008 */ case 0xC740: tagname = "OpcodeList1"; break;                /* DNG 1.3 */
+/* 51009 */ case 0xC741: tagname = "OpcodeList2"; break;                /* DNG 1.3 */
+
+/* 51022 */ case 0xC74E: tagname = "OpcodeList3"; break;                /* DNG 1.3 */
+
+/* 51041 */ case 0xC761: tagname = "NoiseProfile"; break;               /* DNG 1.3 */
+
 
 /* %%%%% */ case 0xffc0: tagname = "JPEG_SOF_0"; break; /* JPEG */  /* EXIF */
 /* %%%%% */ case 0xffc1: tagname = "JPEG_SOF_1"; break; /* JPEG */
