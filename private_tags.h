@@ -79,6 +79,22 @@
 #define TIFFTAG_CR2_0xc5e0                  0xC5E0 /* 50656 */
 #define TIFFTAG_CR2_0xc640                  0xC640 /* 50752 */
 
+/* Panasonic RAW / RW2 */
+#define TIFFTAG_RW2_PANASONICRAWVERSION     0x0001 /* 00001 */
+#define TIFFTAG_RW2_SENSORWIDTH             0x0002 /* 00002 */
+#define TIFFTAG_RW2_SENSORHEIGHT            0x0003 /* 00003 */
+#define TIFFTAG_RW2_SENSORTOPBORDER         0x0004 /* 00004 */
+#define TIFFTAG_RW2_SENSORLEFTBORDER        0x0005 /* 00005 */
+#define TIFFTAG_RW2_IMAGEHEIGHT             0x0006 /* 00006 */
+#define TIFFTAG_RW2_IMAGEWIDTH              0x0007 /* 00007 */
+#define TIFFTAG_RW2_REDBALANCE              0x0011 /* 00017 */
+#define TIFFTAG_RW2_BLUEBALANCE             0x0012 /* 00018 */
+#define TIFFTAG_RW2_ISO                     0x0017 /* 00023 */
+#define TIFFTAG_RW2_WBREDLEVEL              0x0024 /* 00036 */
+#define TIFFTAG_RW2_WBGREENLEVEL            0x0025 /* 00037 */
+#define TIFFTAG_RW2_WBBLUELEVEL             0x0026 /* 00038 */
+#define TIFFTAG_RW2_JPGFROMRAW              0x002E /* 00047 */
+
 #define TIFFTAG_DCSHUESHIFTVALUES           0xFFFF /* 65535 */
 #endif
 

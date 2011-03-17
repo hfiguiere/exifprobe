@@ -99,6 +99,11 @@ read_imageheader(FILE *inptr,unsigned long offset)
                     fileheader.probe_magic = ORF2_MAGIC;
                     fileheader.file_marker = marker;
                 }
+                else if(magic == RW2_MAGIC)
+                {
+                    fileheader.probe_magic = RW2_MAGIC;
+                    fileheader.file_marker = marker;
+                }
                 else if((ciffheader = read_ciffheader(inptr,marker,offset)))
                 {
                     fileheader.file_marker = ciffheader->byteorder;

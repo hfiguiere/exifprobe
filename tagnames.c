@@ -41,6 +41,21 @@ tagname(unsigned short tag)
 
     switch(tag)
     {
+/*     1 */ case  0x01: tagname = "PanasonicRawVersion"; break; /* RW2 */
+/*     2 */ case  0x02: tagname = "SensorWidth"; break; /* RW2 */
+/*     3 */ case  0x03: tagname = "SensorHeight"; break; /* RW2 */
+/*     4 */ case  0x04: tagname = "SensorTopBorder"; break; /* RW2 */
+/*     5 */ case  0x05: tagname = "SensorLeftBorder"; break; /* RW2 */
+/*     6 */ case  0x06: tagname = "ImageHeight"; break; /* RW2 */
+/*     7 */ case  0x07: tagname = "ImageWidth"; break; /* RW2 */
+/*    17 */ case  0x11: tagname = "RedBalance"; break; /* RW2 */
+/*    18 */ case  0x12: tagname = "BlueBalance"; break; /* RW2 */
+/*    23 */ case  0x17: tagname = "ISO"; break; /* RW2 */
+/*    36 */ case  0x24: tagname = "WBRedLevel"; break; /* RW2 */
+/*    37 */ case  0x25: tagname = "WBGreenLevel"; break; /* RW2 */
+/*    38 */ case  0x26: tagname = "WBBlueLevel"; break; /* RW2 */
+/*    47 */ case  0x2E: tagname = "JpgFromRaw"; break; /* RW2 */
+
 /*   254 */ case  0xFE: tagname = "NewSubFileType"; break; /* TIFF6, TIFFEP */
 /*   255 */ case  0xFF: tagname = "SubFileType"; break; /* TIFF6 */
 /*   256 */ case 0x100: tagname = "ImageWidth"; break;   /* TIFF6 EXIF TIFFEP */

@@ -57,6 +57,10 @@ print_header(struct fileheader *header,unsigned long section_id)
             status = print_tiff_header(ORF2_MAGIC,header->file_marker,section_id);
             /* no newline                                             */
             break;
+        case RW2_MAGIC:
+            status = print_tiff_header(RW2_MAGIC,header->file_marker,section_id);
+            /* no newline                                             */
+            break;
         case TIFF_MAGIC:
             status = print_tiff_header(TIFF_MAGIC,header->file_marker,section_id);
             /* no newline                                             */
@@ -109,6 +113,7 @@ print_tiff_header(unsigned short magic,unsigned short byteorder,unsigned long se
             case TIFF_MAGIC: name = "TIFF"; break;
             case ORF1_MAGIC: name = "ORF1"; break;
             case ORF2_MAGIC: name = "ORF2"; break;
+            case RW2_MAGIC:  name = "RW2"; break;
             default: break;
         }
 
@@ -176,6 +181,21 @@ print_filetype(unsigned long magic,unsigned short marker)
         break;
     case ORF2_MAGIC:
         chpr += printf("ORF2");
+        switch(marker)
+        {
+            case TIFF_INTEL:
+                chpr += printf(":II");
+                break;
+            case TIFF_MOTOROLA:
+                chpr += printf(":MM");
+                break;
+            default:
+                break;
+        }
+        status = 0;
+        break;
+    case RW2_MAGIC:
+        chpr += printf("RW2");
         switch(marker)
         {
             case TIFF_INTEL:

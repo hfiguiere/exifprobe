@@ -19,6 +19,7 @@
 #define FILEFMT_TIFF                PROBE_TIFFMAGIC
 #define FILEFMT_ORF1                PROBE_ORF1MAGIC
 #define FILEFMT_ORF2                PROBE_ORF2MAGIC
+#define FILEFMT_RW2                 PROBE_RW2MAGIC
 #define FILEFMT_JPEG                PROBE_JPEGMAGIC
 #define FILEFMT_JP2                 PROBE_JP2MAGIC
 #define FILEFMT_CIFF                PROBE_CIFFMAGIC

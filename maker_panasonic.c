@@ -233,6 +233,7 @@ maker_panasonic1_tagname(unsigned short tag,int model)
     switch(tag)
     {
         case 0x0001: tagname = "Quality"; break;
+        case 0x0002: tagname = "FirmwareVersion"; break;
         case 0x0003: tagname = "WhiteBalance"; break; 
         case 0x0007: tagname = "FocusMode"; break;
         case 0x000f: tagname = "SpotMode"; break;
@@ -243,6 +244,7 @@ maker_panasonic1_tagname(unsigned short tag,int model)
         case 0x0023: tagname = "WhiteBalanceAdjust"; break;
         case 0x0024: tagname = "FlashStrength"; break;
         case 0x0028: tagname = "ColorMode"; break;
+        case 0x0029: tagname = "TimeSincePowerOn"; break;
         case 0x002c: tagname = "Contrast"; break;
         case 0x002d: tagname = "NoiseReduction"; break;
         case 0x0e00: tagname = "PrintIM"; break;

@@ -787,6 +787,11 @@ print_imageformat(struct image_summary *entry)
                 chpr += printf(" ORF2 12bps");
                 entry->imagesubformat = IMGSUBFMT_CFA;
             }
+            else if(entry->fileformat == FILEFMT_RW2)
+            {
+                chpr += printf(" RW2");
+                entry->imagesubformat = IMGSUBFMT_CFA;
+            }
             else
                 chpr += printf(" TIFF");
             break;

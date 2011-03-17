@@ -148,6 +148,7 @@ main(int argc,char **argv)
                 {
                     case ORF1_MAGIC:
                     case ORF2_MAGIC:
+                    case RW2_MAGIC:
                     case TIFF_MAGIC:
                         ifd_offset = read_ulong(inptr,header->file_marker,HERE); 
                         if(ifd_offset > filesize)
@@ -177,6 +178,9 @@ main(int argc,char **argv)
                                 break;
                             case ORF2_MAGIC:
                                 name = "ORF2";
+                                break;
+                            case RW2_MAGIC:
+                                name = "RW2";
                                 break;
                             case TIFF_MAGIC:
                             default:
