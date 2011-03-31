@@ -49,12 +49,12 @@ print_raf_header(FILE *inptr,struct fileheader *fileheader,unsigned long section
 
     if(Print_options & section_id)
     {
-        /* ###%%% for now, the first 48 bytes are "header"            */
+        /* ###%%% for now, the first 60 bytes are "header"            */
         if(fileheader && (fileheader->probe_magic == PROBE_RAFMAGIC))
         {
             print_ascii(inptr,28,0);
             chpr += printf(" Model = ");
-            print_ascii(inptr,16,28);
+            print_ascii(inptr,32,28);
             status = 0;
         }
         else
@@ -110,12 +110,7 @@ process_raf(FILE *inptr,unsigned long offset,
         print_tag_address(SECTION,offset,indent,"@");
         chpr += printf("<Offset Directory>");
         chpr = newline(chpr);
-        print_tag_address(ENTRY,offset,indent + SMALLINDENT,"@");
-        if((PRINT_VALUE))
-            print_ubytes(inptr,16,offset);
-        chpr = newline(chpr);
     }
-    offset += 16;
 
     /* Some sort of ID or version?                                    */
     print_tag_address(ENTRY,offset,indent + SMALLINDENT,"@");
@@ -123,22 +118,22 @@ process_raf(FILE *inptr,unsigned long offset,
     {
         if((PRINT_LONGNAMES))
             chpr += printf("%s.",parent_name);
-        chpr += printf("%-*.*s",TAGWIDTH,TAGWIDTH,"unknown1");
+        chpr += printf("%-*.*s",TAGWIDTH,TAGWIDTH,"HeaderVersion");
     }
     if((PRINT_VALUE))
     {
         chpr += printf(" = ");
-        print_ascii(inptr,4,60);
+        print_ascii(inptr,4,offset);
     }
     chpr = newline(chpr);
     offset += 4;
 
-    /* Another short section of zeros. Why again?                     */
+    /* A 20 bytes section of zeros. Unknown                     */
     if((PRINT_SECTION))
     {
         print_tag_address(ENTRY,offset,indent + SMALLINDENT,"@");
         if((PRINT_VALUE))
-            print_ubytes(inptr,16,offset);
+            print_ubytes(inptr,20,offset);
         chpr = newline(chpr);
     }
 

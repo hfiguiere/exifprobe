@@ -265,7 +265,7 @@ main(int argc,char **argv)
                         }
                         if(status == 0)
                         {
-                            max_offset = process_raf(inptr,Start_offset + 48,summary_entry,"RAF",0L);
+                            max_offset = process_raf(inptr,Start_offset + 60,summary_entry,"RAF",0L);
                             if(max_offset > 0L)
                                 status = 0;
                         }
