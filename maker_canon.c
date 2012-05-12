@@ -516,10 +516,12 @@ maker_canon1_tagname(unsigned short tag,int model)
         case 0x000c: tagname = "CameraSerialNo"; break;
         case 0x000e: tagname = "FileLength"; break;
         case 0x000f: tagname = "CustomFunctions"; break;
+        case 0x0010: tagname = "UniqueModelId"; break; /* from dcraw */
         case 0x0012: tagname = "PictureInfo"; break;
         case 0x0081: tagname = "JpegImage"; break;
         case 0x0090: tagname = "CustomFunctions"; break;
         case 0x0093: tagname = "FileInfo**"; break;   /* exiftool shows wrong type */
+        case 0x0095: tagname = "LensName"; break;
         case 0x00a0: tagname = "ColorInfo**"; break;  /* exiftool - wrong # values */
         case 0x00a9: tagname = "WhiteBalanceTable"; break;
         case 0x00ae: tagname = "ColorTemperature"; break;
