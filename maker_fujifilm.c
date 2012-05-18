@@ -179,6 +179,7 @@ maker_fujifilm1_tagname(unsigned short tag,int model)
     switch(tag)
     {
         case 0x0000: tagname = "Version"; break;
+        case 0x0010: tagname = "UniqueSerial"; break; /* Exiv2 */
         case 0x1000: tagname = "Quality"; break;
         case 0x1001: tagname = "Sharpness"; break;
         case 0x1002: tagname = "WhiteBalance"; break;
@@ -194,6 +195,15 @@ maker_fujifilm1_tagname(unsigned short tag,int model)
         case 0x1300: tagname = "BlurWarning"; break;
         case 0x1301: tagname = "FocusWarning"; break;
         case 0x1302: tagname = "AEWarning"; break;
+
+        case 0x1401: tagname = "FilmMode"; break; /* Exiv2 */
+        case 0x1402: tagname = "DynamicRangeSettings"; break; /* Exiv2 */
+        case 0x1403: tagname = "DevelopmentDynamicRange"; break; /* Exiv2 */
+
+        case 0x1404: tagname = "FocalLengthMin"; break;
+        case 0x1405: tagname = "FocalLengthMax"; break;
+        case 0x1406: tagname = "MaxApertureAtMinFocal"; break;
+        case 0x1407: tagname = "MaxApertureAtMaxFocal"; break;
         default: break;
     }
     setnotetagset(1);

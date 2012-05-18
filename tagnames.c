@@ -233,6 +233,7 @@ tagname(unsigned short tag)
 /* 34855 */ case 0x8827: tagname = "ISOSpeedRatings"; break;    /* EXIF TIFFEP */
 /* 34856 */ case 0x8828: tagname = "OECF"; break;   /* EXIF TIFFEP */
 /* 34857 */ case 0x8829: tagname = "Interlace"; break;  /* TIFFEP */
+/* 34864 */ case 0x8830: tagname = "SensitivityType"; break; /* Exiv2 */
 /* 34858 */ case 0x882A: tagname = "TimeZoneOffset"; break; /* TIFFEP */
 /* 34859 */ case 0x882B: tagname = "SelfTimerMode"; break;  /* TIFFEP */
 /* 36864 */ case 0x9000: tagname = "Version"; break;    /* EXIF */
@@ -299,6 +300,12 @@ tagname(unsigned short tag)
 /* 41995 */ case 0xA40B: tagname = "DeviceSettingDescription"; break;   /* EXIF */
 /* 41996 */ case 0xA40C: tagname = "SubjectDistanceRange"; break;   /* EXIF */
 /* 42016 */ case 0xA420: tagname = "ImageUniqueId"; break;  /* EXIF */
+
+/* 42034 */ case 0xA432: tagname = "LensSpecification"; break; /* Fuji? Exiv2 */
+/* 42035 */ case 0xA433: tagname = "LensMake"; break; /* Fuji? Exiv2 */
+/* 42036 */ case 0xA434: tagname = "LensModel"; break; /* Fuji? Exiv2 */
+/* 42037 */ case 0xA435: tagname = "LensSerial"; break; /* Fuji? Exiv2 */
+
 /* 42240 */ case 0xA500: tagname = "Gamma"; break;  /* EXIF 221 */
 
 /* 50003 */ case 0xC353: tagname = "META_Model"; break; /* Kodak APP3 Meta */
