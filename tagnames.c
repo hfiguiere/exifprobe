@@ -412,6 +412,18 @@ tagname(unsigned short tag)
 /* 51081 */ case DNGTAG_ReelName: tagname = "ReelName"; break;          /* Cinema DNG */
 /* 51105 */ case DNGTAG_CameraLabel: tagname = "CameraLabel"; break;    /* Cinema DNG */
 
+/* 51089 */ case DNGTAG_OriginalDefaultFinalSize: tagname = "OriginalDefaultFinalSize"; break; /* DNG 1.4.0 */
+/* 51090 */ case DNGTAG_OriginalBestQualityFinalSize: tagname = "OriginalBestQualityFinalSize"; break; /* DNG 1.4.0 */
+/* 51091 */ case DNGTAG_OriginalDefaultCropSize: tagname = "OriginalDefaultCropSize"; break; /* DNG 1.4.0 */
+/* 51107 */ case DNGTAG_ProfileHueSatMapEncoding: tagname = "ProfileHueSatMapEncoding"; break; /* DNG 1.4.0 */
+/* 51108 */ case DNGTAG_ProfileLookTableEncoding: tagname = "ProfileLookTableEncoding"; break; /* DNG 1.4.0 */
+/* 51109 */ case DNGTAG_BaselineExposureOffset: tagname = "BaselineExposureOffset"; break; /* DNG 1.4.0 */
+/* 51110 */ case DNGTAG_DefaultBlackRender: tagname = "DefaultBlackRender"; break; /* DNG 1.4.0 */
+/* 51111 */ case DNGTAG_NewRawImageDigest: tagname = "NewRawImageDigest"; break; /* DNG 1.4.0 */
+/* 51112 */ case DNGTAG_RawToPreviewGain: tagname = "RawToPreviewGain"; break; /* DNG 1.4.0 */
+/* 51125 */ case DNGTAG_DefaultUserCrop: tagname = "DefaultUserCrop"; break; /* DNG 1.4.0 */
+
+
 /* %%%%% */ case 0xffc0: tagname = "JPEG_SOF_0"; break; /* JPEG */  /* EXIF */
 /* %%%%% */ case 0xffc1: tagname = "JPEG_SOF_1"; break; /* JPEG */
 /* %%%%% */ case 0xffc2: tagname = "JPEG_SOF_2"; break; /* JPEG */

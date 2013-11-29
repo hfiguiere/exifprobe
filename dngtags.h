@@ -103,7 +103,6 @@
 #define DNGTAG_OpcodeList3                  0xC74E      /*      51022   */
 #define DNGTAG_NoiseProfile                 0xC761      /*      51041   */
 
-
 /* Cinema DNG */
 
 #define DNGTAG_TimeCodes                    0xC763      /*      51043   */
@@ -111,5 +110,18 @@
 #define DNGTAG_TStop                        0xC772      /*      51058   */
 #define DNGTAG_ReelName                     0xC789      /*      51081   */
 #define DNGTAG_CameraLabel                  0xC7A1      /*      51105   */
+
+/* DNG 1.4.0 */
+
+#define DNGTAG_OriginalDefaultFinalSize     0xC791      /*      51089   */
+#define DNGTAG_OriginalBestQualityFinalSize 0xC792      /*      51090   */
+#define DNGTAG_OriginalDefaultCropSize      0xC793      /*      51091   */
+#define DNGTAG_ProfileHueSatMapEncoding     0xC7A3      /*      51107   */
+#define DNGTAG_ProfileLookTableEncoding     0xC7A4      /*      51108   */
+#define DNGTAG_BaselineExposureOffset       0xC7A5      /*      51109   */
+#define DNGTAG_DefaultBlackRender           0xC7A6      /*      51110   */
+#define DNGTAG_NewRawImageDigest            0xC7A7      /*      51111   */
+#define DNGTAG_RawToPreviewGain             0xC7A8      /*      51112   */
+#define DNGTAG_DefaultUserCrop              0xC7B5      /*      51125   */
 
 #endif /* DNGTAGS_INCLUDED */
