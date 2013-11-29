@@ -103,4 +103,13 @@
 #define DNGTAG_OpcodeList3                  0xC74E      /*      51022   */
 #define DNGTAG_NoiseProfile                 0xC761      /*      51041   */
 
+
+/* Cinema DNG */
+
+#define DNGTAG_TimeCodes                    0xC763      /*      51043   */
+#define DNGTAG_FrameRate                    0xC764      /*      51044   */
+#define DNGTAG_TStop                        0xC772      /*      51058   */
+#define DNGTAG_ReelName                     0xC789      /*      51081   */
+#define DNGTAG_CameraLabel                  0xC7A1      /*      51105   */
+
 #endif /* DNGTAGS_INCLUDED */

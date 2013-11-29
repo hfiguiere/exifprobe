@@ -21,6 +21,7 @@ static char *ModuleId = "@(#) $Id: tagnames.c,v 1.21 2005/07/24 19:40:09 alex Ex
 #include "tags.h"
 #include "extern.h"
 #include "ciff.h"
+#include "dngtags.h"
 
 /* This function attempts to print a "canonical" name for every tag   */
 /* in the TIFF6, TIFF_EP, EXIF, DNG, and JPEG (10918-1)               */
@@ -405,6 +406,11 @@ tagname(unsigned short tag)
 
 /* 51041 */ case 0xC761: tagname = "NoiseProfile"; break;               /* DNG 1.3 */
 
+/* 51043 */ case DNGTAG_TimeCodes: tagname = "TimeCodes"; break;        /* Cinama DNG */
+/* 51044 */ case DNGTAG_FrameRate: tagname = "FrameRate"; break;        /* Cinema DNG */
+/* 51058 */ case DNGTAG_TStop: tagname = "TStop"; break;                /* Cinema DNG */
+/* 51081 */ case DNGTAG_ReelName: tagname = "ReelName"; break;          /* Cinema DNG */
+/* 51105 */ case DNGTAG_CameraLabel: tagname = "CameraLabel"; break;    /* Cinema DNG */
 
 /* %%%%% */ case 0xffc0: tagname = "JPEG_SOF_0"; break; /* JPEG */  /* EXIF */
 /* %%%%% */ case 0xffc1: tagname = "JPEG_SOF_1"; break; /* JPEG */
