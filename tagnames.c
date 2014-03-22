@@ -316,7 +316,7 @@ tagname(unsigned short tag)
 /* 50648 */ case 0xC5D8: tagname = "TAG_CR2c5d8"; break; /* Canon CR2 */
 /* 50649 */ case 0xC5D9: tagname = "TAG_CR2c5d9"; break; /* Canon CR2 */
 /* 50656 */ case 0xC5E0: tagname = "TAG_CR2c5e0"; break; /* Canon CR2 */
-/* 50752 */ case 0xC640: tagname = "TAG_CR2c640"; break; /* Canon CR2 */
+/* 50752 */ case 0xC640: tagname = "CR2Slice"; break; /* Canon CR2 */
 
 /* 50706 */ case 0xC612: tagname = "DNGVersion"; break;                 /* DNG */
 /* 50707 */ case 0xC613: tagname = "DNGBackwardVersion"; break;         /* DNG */

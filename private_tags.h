@@ -77,7 +77,7 @@
 #define TIFFTAG_CR2_0xc5d8                  0xC5D8 /* 50648 */
 #define TIFFTAG_CR2_0xc5d9                  0xC5D9 /* 50649 */
 #define TIFFTAG_CR2_0xc5e0                  0xC5E0 /* 50656 */
-#define TIFFTAG_CR2_0xc640                  0xC640 /* 50752 */
+#define TIFFTAG_CR2_SLICE                   0xC640 /* 50752 */
 
 /* Panasonic RAW / RW2 */
 #define TIFFTAG_RW2_PANASONICRAWVERSION     0x0001 /* 00001 */

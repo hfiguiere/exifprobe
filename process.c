@@ -495,7 +495,7 @@ process_tiff_ifd(FILE *inptr,unsigned short byteorder,unsigned long ifd_offset,
                         break;
                     case TIFFTAG_CR2_0xc5d8:
                     case TIFFTAG_CR2_0xc5e0:
-                    case TIFFTAG_CR2_0xc640:
+                    case TIFFTAG_CR2_SLICE:
                         /* These tags appear (so far) only in the     */
                         /* weird IFD containing the lossless jpeg     */
                         /* primary. It is possible to check for other */
