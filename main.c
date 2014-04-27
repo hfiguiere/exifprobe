@@ -83,7 +83,7 @@ main(int argc,char **argv)
 
     while((file = *argv++))
     {
-        inptr = fopen(file,"r");
+        inptr = fopen(file,"rb");   /* 'b' is required for WINDOWS */
         if(inptr == FNULL)
         {
             fprintf(stderr,"%s: failed to open file %s\n",Progname,file);
