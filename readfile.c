@@ -23,7 +23,7 @@ static char *ModuleId = "@(#) $Id: readfile.c,v 1.30 2005/07/24 18:15:28 alex Ex
 
 
 #include <stdio.h>
-#include <unistd.h>
+#include <stdint.h>
 #include <sys/types.h>
 #include <string.h>
 #include <ctype.h>

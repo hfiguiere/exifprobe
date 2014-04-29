@@ -21,9 +21,11 @@ http://archive.ubuntu.com/ubuntu/pool/universe/e/exifprobe/exifprobe_2.0.1.orig.
   when exifprobe is build under Windows.
   - a file byteorder.h with defines NATIVE_BYTEORDER_LITTLE_ENDIAN
   - a file comptime.h
-  - a replacement for unistd.h from http://stackoverflow.com/a/826027
-  - a replacement for getopt.h and getopt.c from https://gist.github.com/ashelly/7776712
-  - a file snprintf.c with an implementation of snprintf(), see http://stackoverflow.com/a/13067917/321013
+  - an empty file as a replacement for unistd.h
+  - a replacement for getopt.h and getopt.c (with BSD license) from
+    http://www.rohitab.com/discuss/topic/39420-a-proper-port-of-getopt/
+  - a file snprintf.c which wrapps the Windows _snprintf() function to work around its non
+    standard negative return value, see http://stackoverflow.com/a/13067917/321013
 
 * The following modifications had to be applied to the original 2.0.1 source code
 
@@ -31,18 +33,17 @@ http://archive.ubuntu.com/ubuntu/pool/universe/e/exifprobe/exifprobe_2.0.1.orig.
   86c86
   <         inptr = fopen(file,"r");
   ---
-  >         inptr = fopen(file,"rb");     /* FOR WINDOWS */
+  >         inptr = fopen(file,"rb");
   
   diff exifprobe-2.0.1.orig/process.c exifprobe-2.0.1/process.c
   254c254,255
   <                         fseek(inptr,0L,current_offset);
   ---
-  >                         /* fseek(inptr,0L,current_offset); */         /* BUGFIX */
-  >                         fseek(inptr,current_offset, 0);
+  >                         fseek(inptr,current_offset,0);
    
   diff exifprobe-2.0.1.orig/readfile.c exifprobe-2.0.1/readfile.c
   25a26
-  > #include <unistd.h>
+  > #include <stdint.h>
 
 * To generate the Windows executable open and build the solution exifprobe.sln
   in Visual Studio 2010 or later.
