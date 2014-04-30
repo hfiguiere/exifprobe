@@ -251,7 +251,7 @@ process_tiff_ifd(FILE *inptr,unsigned short byteorder,unsigned long ifd_offset,
                     if(fseek(inptr,0L,2) != -1)
                     {
                         limit_offset = ftell(inptr);
-                        fseek(inptr,0L,current_offset);
+                        fseek(inptr,current_offset,0);
                     }
                 }
                 /* If there's an error on input, or we can't check    */

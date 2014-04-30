@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{6489E0DA-98B2-4B8B-BDE5-68D3CE5E0CD3}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>exifprobe</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;u_int32_t=uint32_t;strncasecmp=_strnicmp;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;u_int32_t=uint32_t;strncasecmp=_strnicmp;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\defs.h" />
+    <ClInclude Include="..\exiftags.h" />
+    <ClInclude Include="..\extern.h" />
+    <ClInclude Include="..\global.h" />
+    <ClInclude Include="..\jpegtags.h" />
+    <ClInclude Include="..\misc.h" />
+    <ClInclude Include="..\tiffeptags.h" />
+    <ClInclude Include="..\tifftags.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\ciff.c" />
+    <ClCompile Include="..\interpret.c" />
+    <ClCompile Include="..\jp2000.c" />
+    <ClCompile Include="..\lib\veclib.c" />
+    <ClCompile Include="..\main.c" />
+    <ClCompile Include="..\maker_agfa.c" />
+    <ClCompile Include="..\maker_asahi.c" />
+    <ClCompile Include="..\maker_canon.c" />
+    <ClCompile Include="..\maker_casio.c" />
+    <ClCompile Include="..\maker_epson.c" />
+    <ClCompile Include="..\maker_fujifilm.c" />
+    <ClCompile Include="..\maker_generic.c" />
+    <ClCompile Include="..\maker_hp.c" />
+    <ClCompile Include="..\maker_kodak.c" />
+    <ClCompile Include="..\maker_konica.c" />
+    <ClCompile Include="..\maker_kyocera.c" />
+    <ClCompile Include="..\maker_leica.c" />
+    <ClCompile Include="..\maker_minolta.c" />
+    <ClCompile Include="..\maker_nikon.c" />
+    <ClCompile Include="..\maker_olympus.c" />
+    <ClCompile Include="..\maker_panasonic.c" />
+    <ClCompile Include="..\maker_ricoh.c" />
+    <ClCompile Include="..\maker_sanyo.c" />
+    <ClCompile Include="..\maker_sigma.c" />
+    <ClCompile Include="..\maker_sony.c" />
+    <ClCompile Include="..\maker_tagnames.c" />
+    <ClCompile Include="..\maker_toshiba.c" />
+    <ClCompile Include="..\maker_traveler.c" />
+    <ClCompile Include="..\misc.c" />
+    <ClCompile Include="..\mrw.c" />
+    <ClCompile Include="..\options.c" />
+    <ClCompile Include="..\print.c" />
+    <ClCompile Include="..\print_maker.c" />
+    <ClCompile Include="..\process.c" />
+    <ClCompile Include="..\raf.c" />
+    <ClCompile Include="..\readfile.c" />
+    <ClCompile Include="..\tagnames.c" />
+    <ClCompile Include="..\x3f.c" />
+    <ClCompile Include="comptime.c" />
+    <ClCompile Include="getopt.c" />
+    <ClCompile Include="snprintf.c" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
