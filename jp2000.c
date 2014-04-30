@@ -453,7 +453,7 @@ process_jp2_xml(FILE *inptr,struct jp2box *box,int indent)
         print_tag_address(VALUE,dataoffset,indent + 10,"=");
         if((PRINT_VALUE))
         {
-            if((inptr && (fseek(inptr,dataoffset,0)) != -1))
+            if((inptr && (fseek(inptr,dataoffset,SEEK_SET)) != -1))
             {
                 while(size > 0ULL)
                 {
@@ -503,7 +503,7 @@ process_jp2_jp2i(FILE *inptr,struct jp2box *box,int indent)
     {
         print_tag_address(SECTION,dataoffset,indent + 8,"=");
         size = boxlength - 8;
-        if((inptr && (fseek(inptr,dataoffset,0)) != -1))
+        if((inptr && (fseek(inptr,dataoffset,SEEK_SET)) != -1))
         {
             while(size > 0ULL)
             {

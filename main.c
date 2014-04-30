@@ -107,7 +107,7 @@ main(int argc,char **argv)
             }
             else if(Start_offset)
             {
-                if(fseek(inptr,Start_offset,0) == -1)
+                if(fseek(inptr,Start_offset,SEEK_SET) == -1)
                 {
                     fprintf(stderr,"%s: FAILED to seek to start offset %lu\n",
                                                         Progname,Start_offset);

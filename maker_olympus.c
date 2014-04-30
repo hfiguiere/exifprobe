@@ -231,7 +231,7 @@ olympus1_offset_makervalue(FILE *inptr,unsigned short byteorder,
                 }
                 /* make certain we're at the end                      */
                 clearerr(inptr);
-                fseek(inptr,value_offset + count,0);
+                fseek(inptr,value_offset + count,SEEK_SET);
                 break;
             case 0x0f00: /* Data                                      */
                 if(at_offset && (PRINT_ENTRY))
@@ -266,7 +266,7 @@ olympus1_offset_makervalue(FILE *inptr,unsigned short byteorder,
                     chpr = newline(1);
                 }
                 /* make certain we're at the end                      */
-                fseek(inptr,value_offset + count,0);
+                fseek(inptr,value_offset + count,SEEK_SET);
                 break;
             case 0x2010:    /* Private IFD's all                      */
             case 0x2020:
@@ -1216,7 +1216,7 @@ olympus2020_offset_value(FILE *inptr,unsigned short byteorder,
                 }
                 /* make certain we're at the end                      */
                 clearerr(inptr);
-                fseek(inptr,value_offset + count,0);
+                fseek(inptr,value_offset + count,SEEK_SET);
                 break;
             case 0x0304:
             case 0x0503:

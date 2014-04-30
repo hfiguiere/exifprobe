@@ -104,7 +104,7 @@ main(int argc,char **argv)
             perror("\tbecause");
             exit(3);
         }
-        fseek(ifp,start_offset,0);
+        fseek(ifp,start_offset,SEEK_SET);
         if(sizeleft < COPYBUFSIZE)
             readsize = sizeleft;
         else

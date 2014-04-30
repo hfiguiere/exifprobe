@@ -176,7 +176,7 @@ THIS_MAKE1_offset_makervalue(FILE *inptr,unsigned short byteorder,
 				putindent(SUBINDENT);
 				printf("End of %s",nameoftag);
 				/* make certain we're at the end unless 'inptr' bad   */
-				fseek(inptr,value_offset + entry_ptr->count,0);
+				fseek(inptr,value_offset + entry_ptr->count,SEEK_SET);
 				break;
 			case 0x0e00: /* PrintIM (Epson Print Image matching)      */
 			case 0x0f00: /* Data                                      */
@@ -197,7 +197,7 @@ THIS_MAKE1_offset_makervalue(FILE *inptr,unsigned short byteorder,
 								indent,SUBINDENT,addrwidth);
 				}
 				/* make certain we're at the end unless 'inptr' bad   */
-				fseek(inptr,value_offset + entry_ptr->count,0);
+				fseek(inptr,value_offset + entry_ptr->count,SEEK_SET);
 				break;
 			default:
 				print_generic_offset_makervalue(inptr,byteorder,entry_ptr,
@@ -238,7 +238,7 @@ THIS_MAKE2_offset_makervalue(FILE *inptr,unsigned short byteorder,
 				putindent(SUBINDENT);
 				printf("End of %s",nameoftag);
 				/* make certain we're at the end unless 'inptr' bad   */
-				fseek(inptr,value_offset + entry_ptr->count,0);
+				fseek(inptr,value_offset + entry_ptr->count,SEEK_SET);
 				break;
 			case 0x0010: /* Data                                      */
 				print_tag_address(value_offset,indent,prefix,addrwidth);
@@ -258,7 +258,7 @@ THIS_MAKE2_offset_makervalue(FILE *inptr,unsigned short byteorder,
 								indent,SUBINDENT,addrwidth);
 				}
 				/* make certain we're at the end          */
-				fseek(inptr,value_offset + entry_ptr->count,0);
+				fseek(inptr,value_offset + entry_ptr->count,SEEK_SET);
 				break;
 			default:
 				print_generic_offset_makervalue(inptr,byteorder,entry_ptr,

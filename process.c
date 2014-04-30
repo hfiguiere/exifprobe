@@ -248,10 +248,10 @@ process_tiff_ifd(FILE *inptr,unsigned short byteorder,unsigned long ifd_offset,
                     limit_offset = max_offset;
                 else
                 {
-                    if(fseek(inptr,0L,2) != -1)
+                    if(fseek(inptr,0L,SEEK_END) != -1)
                     {
                         limit_offset = ftell(inptr);
-                        fseek(inptr,current_offset,0);
+                        fseek(inptr,current_offset,SEEK_SET);
                     }
                 }
                 /* If there's an error on input, or we can't check    */
@@ -1795,10 +1795,10 @@ process_exif_ifd(FILE *inptr,unsigned short byteorder,
                 limit_offset = max_offset;
             else
             {
-                if(fseek(inptr,0L,2) != -1)
+                if(fseek(inptr,0L,SEEK_END) != -1)
                 {
                     limit_offset = ftell(inptr);
-                    fseek(inptr,0L,current_offset);
+                    fseek(inptr,current_offset,SEEK_SET);
                 }
             }
             /* If there's an error on input, or we can't check    */
@@ -2606,7 +2606,7 @@ process_jpeg_segments(FILE *inptr,unsigned long marker_offset,unsigned short tag
                                 else
                                 {
                                     max_offset = 0;
-                                    (void)fseek(inptr,start_of_jpeg_data + data_length - 2L,0);
+                                    (void)fseek(inptr,start_of_jpeg_data + data_length - 2L,SEEK_SET);
                                     (void)jpeg_status(JPEG_NO_EOI);
                                 }
                             }
@@ -2622,7 +2622,7 @@ process_jpeg_segments(FILE *inptr,unsigned long marker_offset,unsigned short tag
                         /* limit for the search,                      */
                         if(Debug & JPEG_EOI_DEBUG)
                             printf("DEBUG: max_eoi=%lu\n",max_eoi);
-                        if(fseek(inptr,0L,2) == 0)
+                        if(fseek(inptr,0L,SEEK_END) == 0)
                         {
                             /* Values to use if a forward scan is     */
                             /* required.                              */
@@ -3308,7 +3308,7 @@ forward_scan_for_eoi(FILE *inptr,unsigned long start_of_data,
     unsigned long tagloc;
     int chpr = 0;
 
-    if(inptr && (fseek(inptr,start_of_data,0) != -1))
+    if(inptr && (fseek(inptr,start_of_data,SEEK_SET) != -1))
     {
         if(Debug & JPEG_EOI_DEBUG)
             printf("DEBUG: start scan at %lu\n",start_of_data);
@@ -4242,7 +4242,7 @@ process_appn(FILE *inptr,unsigned long appn_offset,unsigned short tag,
             chpr += printf("</%s>",name);
             chpr = newline(chpr);
         }
-        fseek(inptr,appn_offset + app_length,0);
+        fseek(inptr,appn_offset + app_length,SEEK_SET);
     }
     setcharsprinted(chpr);
     return(appn_offset + app_length + 2);

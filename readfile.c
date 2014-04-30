@@ -280,7 +280,7 @@ read_ushort(FILE *inptr,unsigned short byteorder,unsigned long offset)
     {
         clearerr(inptr);
         curoffset = ftell(inptr);
-        if((offset != HERE) && (fseek(inptr,offset,0) == -1))
+        if((offset != HERE) && (fseek(inptr,offset,SEEK_SET) == -1))
         {
             printred(" SEEK FAILED to read unsigned short at offset ");
             printf("%lu",offset);
@@ -328,7 +328,7 @@ read_ubyte(FILE *inptr,unsigned long offset)
     {
         clearerr(inptr);
         curoffset = ftell(inptr);
-        if((offset != HERE) && (fseek(inptr,offset,0) == -1))
+        if((offset != HERE) && (fseek(inptr,offset,SEEK_SET) == -1))
         {
             printred(" SEEK FAILED to read unsigned byte at offset ");
             chpr += printf("%lu",offset);
@@ -379,7 +379,7 @@ read_ulong(FILE *inptr,unsigned short byteorder,unsigned long offset)
     {
         clearerr(inptr);
         curoffset = ftell(inptr);
-        if((offset != HERE) && (fseek(inptr,offset,0) == -1))
+        if((offset != HERE) && (fseek(inptr,offset,SEEK_SET) == -1))
         {
             printred(" SEEK FAILED to read unsigned 32bit integer at offset ");
             printf("%lu",offset);
@@ -439,7 +439,7 @@ read_ulong64(FILE *inptr,unsigned short byteorder,unsigned long offset)
     {
         clearerr(inptr);
         curoffset = ftell(inptr);
-        if((offset != HERE) && (fseek(inptr,offset,0) == -1))
+        if((offset != HERE) && (fseek(inptr,offset,SEEK_SET) == -1))
             chpr += printf(" seek failed to offset %lu to read unsigned long\n",
                     offset);
         else if(fread(rbuf,1,sizeof(long long),inptr) == sizeof(long long))
@@ -500,7 +500,7 @@ read_double(FILE *inptr,unsigned short byteorder,unsigned long offset)
     {
         clearerr(inptr);
         curoffset = ftell(inptr);
-        if((offset != HERE) && (fseek(inptr,offset,0) == -1))
+        if((offset != HERE) && (fseek(inptr,offset,SEEK_SET) == -1))
             chpr += printf(" seek failed to offset %lu to read unsigned long\n",
                     offset);
         else if(fread(rbuf,1,sizeof(double),inptr) == sizeof(double))
@@ -544,7 +544,7 @@ read_bytes(FILE *inptr,unsigned long nbytes,unsigned long offset)
             {
                 clearerr(inptr);
                 curoffset = ftell(inptr);
-                if((offset != HERE) && (fseek(inptr,offset,0) == -1))
+                if((offset != HERE) && (fseek(inptr,offset,SEEK_SET) == -1))
                 {
                     printred(" SEEK FAILED to read unsigned bytes at offset ");
                     chpr += printf("%lu",offset);
@@ -736,7 +736,7 @@ read_string(FILE *inptr,unsigned long offset,unsigned long max_bytes)
     {
         clearerr(inptr);
         curoffset = ftell(inptr);
-        if((offset != HERE) && (fseek(inptr,offset,0) == -1))
+        if((offset != HERE) && (fseek(inptr,offset,SEEK_SET) == -1))
         {
             printred(" SEEK FAILED to read ascii string at offset ");
             chpr += printf("%lu",offset);
@@ -810,10 +810,10 @@ get_filesize(FILE *inptr)
         clearerr(inptr);
         /* move back here after getting the size                      */
         current_offset = ftell(inptr);
-        if(fseek(inptr,0L,2) == 0)
+        if(fseek(inptr,0L,SEEK_END) == 0)
         {
             size = ftell(inptr);
-            if(fseek(inptr,current_offset,0) != 0)
+            if(fseek(inptr,current_offset,SEEK_SET) != 0)
                 clearerr(inptr);    /* silently                       */
         }
         else

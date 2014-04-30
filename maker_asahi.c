@@ -297,7 +297,7 @@ asahi1_offset_makervalue(FILE *inptr,unsigned short byteorder,
                 }
                 /* make certain we're at the end                      */
                 clearerr(inptr);
-                fseek(inptr,value_offset + count,0);
+                fseek(inptr,value_offset + count,SEEK_SET);
                 break;
             case 0x0e00: /* PrintIM (Epson Print Image matching)      */
                 if(!at_offset && (PRINT_VALUE))
@@ -403,7 +403,7 @@ asahi2_offset_makervalue(FILE *inptr,unsigned short byteorder,
                 }
                 /* make certain we're at the end                      */
                 clearerr(inptr);
-                fseek(inptr,value_offset + count,0);
+                fseek(inptr,value_offset + count,SEEK_SET);
                 break;
             case 0x0e00: /* PrintIM (Epson Print Image matching)      */
                 if(!at_offset && (PRINT_VALUE))

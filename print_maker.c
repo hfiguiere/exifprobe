@@ -517,7 +517,7 @@ print_generic_offset_makervalue(FILE *inptr,unsigned short byteorder,
                                     indent,SUBINDENT);
                     }
                     /* make certain we're at the end                  */
-                    fseek(inptr,entry_ptr->value + fileoffset_base + entry_ptr->count,0);
+                    fseek(inptr,entry_ptr->value + fileoffset_base + entry_ptr->count,SEEK_SET);
                     break;
                 case ASCII:
                     print_ascii(inptr,entry_ptr->count,value_offset); 

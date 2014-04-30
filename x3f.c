@@ -263,7 +263,7 @@ process_x3f(FILE *inptr,struct fileheader *header,unsigned long fileoffset_base,
                 /* as an argument to lower-level functions. Just set  */
                 /* it here.                                           */
                 byteorder = TIFF_INTEL;
-                if(fseek(inptr,-4L,2) == 0)
+                if(fseek(inptr,-4L,SEEK_END) == 0)
                     directory_pointer = ftell(inptr);
                 if(ferror(inptr) == 0)
                 {
@@ -1202,7 +1202,7 @@ process_x3f_props(FILE *inptr,unsigned short byteorder,unsigned long data_offset
         /* Print the index of name/value offsets first                */
         for(i = 0; i < num_entries; ++i)
         {
-            if(fseek(inptr,offset,0) == 0)
+            if(fseek(inptr,offset,SEEK_SET) == 0)
             {
                 name_offset = read_ulong(inptr,byteorder,HERE);
                 name_offset *= 2;
@@ -1290,7 +1290,7 @@ process_x3f_props(FILE *inptr,unsigned short byteorder,unsigned long data_offset
         /* Read 'em again, and this time show the names and values    */
         for(i = 0; i < num_entries; ++i)
         {
-            if(fseek(inptr,offset,0) == 0)
+            if(fseek(inptr,offset,SEEK_SET) == 0)
             {
                 name_offset = read_ulong(inptr,byteorder,HERE);
                 name_offset *= 2;
@@ -1365,7 +1365,7 @@ print_property(FILE *inptr,unsigned short byteorder,unsigned long name_offset,
     if(inptr)
     {
         clearerr(inptr);
-        if(fseek(inptr,name_offset,0) == 0)
+        if(fseek(inptr,name_offset,SEEK_SET) == 0)
         {
             if((PRINT_SECTION) && (PRINT_VALUE_AT_OFFSET))
             {
@@ -1420,7 +1420,7 @@ print_property(FILE *inptr,unsigned short byteorder,unsigned long name_offset,
         }
         if((PRINT_SECTION) && (PRINT_VALUE_AT_OFFSET))
             chpr = newline(chpr);
-        if(fseek(inptr,value_offset,0) == 0)
+        if(fseek(inptr,value_offset,SEEK_SET) == 0)
         {
             if((PRINT_SECTION) && (PRINT_VALUE_AT_OFFSET))
             {

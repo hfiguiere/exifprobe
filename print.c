@@ -831,7 +831,7 @@ print_offset_value(FILE *inptr,unsigned short byteorder,
                                 }
                             }
                             /* make certain we're at the end          */
-                            fseek(inptr,(long)(value_offset + entry_ptr->count),0);
+                            fseek(inptr,(long)(value_offset + entry_ptr->count),SEEK_SET);
                             break;
                     }
                     if(!at_offset && (PRINT_VALUE))
@@ -1488,7 +1488,7 @@ print_urational(FILE *inptr,unsigned long count,unsigned short byteorder,
         {
             chpr += printf(" ... ");
             offset += (unsigned long)(count - j) * 8UL;
-            fseek(inptr,offset,0);
+            fseek(inptr,offset,SEEK_SET);
             num = read_ulong(inptr,byteorder,HERE);
             if(feof(inptr) || ferror(inptr))
             {
@@ -1606,7 +1606,7 @@ print_srational(FILE *inptr,unsigned long count,unsigned short byteorder,
         {
             chpr += printf(" ... ");
             offset += (unsigned long)(count - j) * 8UL;
-            fseek(inptr,offset,0);
+            fseek(inptr,offset,SEEK_SET);
             num = (long)read_ulong(inptr,byteorder,HERE);
             if(feof(inptr) || ferror(inptr))
             {
@@ -1778,7 +1778,7 @@ print_ascii(FILE *inptr,unsigned long count,unsigned long offset)
 
     remaining = count;
     nread = 0;
-    if((offset != HERE) && (fseek(inptr,offset,0) == -1))
+    if((offset != HERE) && (fseek(inptr,offset,SEEK_SET) == -1))
     {
         chpr += printf(" seek failed to offset %lu to print ascii",offset);
         chpr = newline(chpr);
@@ -1853,7 +1853,7 @@ print_unicode(FILE *inptr,unsigned long count,unsigned long offset,unsigned shor
     int chpr = 0;
 
     nread = 0;
-    if((offset != HERE) && (fseek(inptr,offset,0) == -1))
+    if((offset != HERE) && (fseek(inptr,offset,SEEK_SET) == -1))
     {
         chpr += printf(" seek failed to offset %lu to print unicode",offset);
         chpr = newline(chpr);
@@ -1972,7 +1972,7 @@ print_user_comment(FILE *inptr,unsigned long count,unsigned long offset,
     {
         if(PRINT_SECTION)
             chpr += printf("length %lu+8: (CC=",count - 8);
-        if((offset != HERE) && (fseek(inptr,offset,0) == -1))
+        if((offset != HERE) && (fseek(inptr,offset,SEEK_SET) == -1))
         {
             chpr += printf("seek failed to offset %lu to process user comment)",offset);
             chpr = newline(chpr);
@@ -2017,7 +2017,7 @@ print_user_comment(FILE *inptr,unsigned long count,unsigned long offset,
                 else
                 {
                     /* check for all spaces                               */
-                    if(fseek(inptr,offset + 8,0))
+                    if(fseek(inptr,offset + 8,SEEK_SET))
                     {
                         chpr += printf(" re-seek to comment offset %lu failed ",offset + 8);
                         chpr = newline(chpr);
@@ -2035,7 +2035,7 @@ print_user_comment(FILE *inptr,unsigned long count,unsigned long offset,
                             chpr += printf("(%d spaces)",i - 8);
                         else
                         {
-                            if(fseek(inptr,offset + i,0))
+                            if(fseek(inptr,offset + i,SEEK_SET))
                             {
                                 chpr += printf(" re-seek to comment offset %lu failed ",offset + 8);
                                 why(stdout);
@@ -2412,7 +2412,7 @@ hexdump(FILE *inptr,unsigned long offset,unsigned long size,
             if(size < max_to_print)
                 max_to_print = size;
 
-            if((offset != HERE) && (fseek(inptr,offset,0) == -1))
+            if((offset != HERE) && (fseek(inptr,offset,SEEK_SET) == -1))
             {
                 chpr += printf(" seek failed to offset %lu to print hex/ascii dump",offset);
                 chpr = newline(chpr);
@@ -2747,10 +2747,10 @@ process_private_ifd(FILE *inptr,unsigned short byteorder,
                 limit_offset = max_offset;
             else
             {
-                if(fseek(inptr,0L,2) != -1)
+                if(fseek(inptr,0L,SEEK_END) != -1)
                 {
                     limit_offset = ftell(inptr);
-                    fseek(inptr,0L,current_offset);
+                    fseek(inptr,current_offset,SEEK_SET);
                 }
             }
             /* If there's an error on input, or we can't check    */
@@ -3217,7 +3217,7 @@ print_private_offset_value(FILE *inptr,unsigned short byteorder,
                                     indent,SUBINDENT);
                     }
                     /* make certain we're at the end                  */
-                    fseek(inptr,(long)(entry_ptr->value + fileoffset_base + entry_ptr->count),0);
+                    fseek(inptr,(long)(entry_ptr->value + fileoffset_base + entry_ptr->count),SEEK_SET);
                     break;
                 case ASCII:
                     print_ascii(inptr,entry_ptr->count,value_offset); 

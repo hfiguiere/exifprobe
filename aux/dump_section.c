@@ -178,7 +178,7 @@ main(int argc,char **argv)
         {
             if(show_bytes_decimal)
             {
-                fseek(ifp,start_offset,0);
+                fseek(ifp,start_offset,SEEK_SET);
                 offset = start_offset;
                 i = 0;
                 printf("\n=============================================\nUnsigned byte - decimal:\n");
@@ -197,7 +197,7 @@ main(int argc,char **argv)
             if(show_bytes_hex)
             {
                 printf("\n=============================================\nUnsigned byte - hex:\n");
-                fseek(ifp,start_offset,0);
+                fseek(ifp,start_offset,SEEK_SET);
                 offset = start_offset;
                 i = 0;
                 while((offset <= end_offset) && !feof(ifp) && !ferror(ifp))
@@ -254,7 +254,7 @@ main(int argc,char **argv)
         {
             if(show_long_decimal)
             {
-                fseek(ifp,start_offset,0);
+                fseek(ifp,start_offset,SEEK_SET);
                 offset = start_offset;
                 i = 0;
                 printf("\n=============================================\nUnsigned long - decimal:\n");
@@ -273,7 +273,7 @@ main(int argc,char **argv)
             }
             if(show_long_hex)
             {
-                fseek(ifp,start_offset,0);
+                fseek(ifp,start_offset,SEEK_SET);
                 offset = start_offset;
                 i = 0;
                 printf("\n=============================================\nUnsigned long - hex:\n");
@@ -296,7 +296,7 @@ main(int argc,char **argv)
         {
             if(show_long_rational)
             {
-                fseek(ifp,start_offset,0);
+                fseek(ifp,start_offset,SEEK_SET);
                 offset = start_offset;
                 i = 0;
                 printf("\n=============================================\nUnsigned long - rational:\n");
@@ -319,7 +319,7 @@ main(int argc,char **argv)
             }
             if(show_short_rational)
             {
-                fseek(ifp,start_offset,0);
+                fseek(ifp,start_offset,SEEK_SET);
                 offset = start_offset;
                 i = 0;
                 printf("\n=============================================\nUnsigned short rational:\n");
@@ -363,7 +363,7 @@ read_ushort(FILE *inptr,unsigned short byteorder,unsigned long offset)
     {
         clearerr(inptr);
         curoffset = ftell(inptr);
-        if((offset != HERE) && (fseek(inptr,offset,0) == -1))
+        if((offset != HERE) && (fseek(inptr,offset,SEEK_SET) == -1))
         {
             printf(" SEEK FAILED to read unsigned short at offset ");
             printf("%lu",offset);
@@ -405,7 +405,7 @@ read_ulong(FILE *inptr,unsigned short byteorder,unsigned long offset)
     {
         clearerr(inptr);
         curoffset = ftell(inptr);
-        if((offset != HERE) && (fseek(inptr,offset,0) == -1))
+        if((offset != HERE) && (fseek(inptr,offset,SEEK_SET) == -1))
         {
             printf(" SEEK FAILED to read unsigned 32bit integer at offset ");
             printf("%lu",offset);

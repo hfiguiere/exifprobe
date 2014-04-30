@@ -270,7 +270,7 @@ nikon1_offset_makervalue(FILE *inptr,unsigned short byteorder,
                 }
                 /* make certain we're at the end                      */
                 clearerr(inptr);
-                fseek(inptr,value_offset + count,0);
+                fseek(inptr,value_offset + count,SEEK_SET);
                 break;
             case 0x0f00: /* Data                                      */
                 if(at_offset && (PRINT_ENTRY))
@@ -305,7 +305,7 @@ nikon1_offset_makervalue(FILE *inptr,unsigned short byteorder,
                     chpr = newline(1);
                 }
                 /* make certain we're at the end                      */
-                fseek(inptr,value_offset + count,0);
+                fseek(inptr,value_offset + count,SEEK_SET);
                 break;
             default:
                 print_generic_offset_makervalue(inptr,byteorder,entry_ptr,
@@ -454,7 +454,7 @@ nikon2_offset_makervalue(FILE *inptr,unsigned short byteorder,
                 }
                 /* make certain we're at the end unless 'inptr' bad   */
                 clearerr(inptr);
-                fseek(inptr,value_offset + count,0);
+                fseek(inptr,value_offset + count,SEEK_SET);
                 break;
             case 0x0e00: /* PrintIM (Epson Print Image matching)      */
                 if(!at_offset && (PRINT_VALUE))
@@ -501,7 +501,7 @@ nikon2_offset_makervalue(FILE *inptr,unsigned short byteorder,
                     chpr = newline(1);
                 }
                 /* make certain we're at the end                      */
-                fseek(inptr,value_offset + count,0);
+                fseek(inptr,value_offset + count,SEEK_SET);
                 break;
             case 0x0097:    /* Color Balance ????                     */
                 /* Most models show this as an UNDEFINED section; the */

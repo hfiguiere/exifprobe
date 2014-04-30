@@ -60,7 +60,7 @@ process_ciff(FILE *inptr,struct fileheader *header,unsigned long fileoffset_base
                 heap_start = fileoffset_base + ciffheader->headerlength;
                 if(heaplength)
                     offset_table_end = fileoffset_base + heaplength;
-                else if(fseek(inptr,0L,2) == 0)
+                else if(fseek(inptr,0L,SEEK_END) == 0)
                     offset_table_end = ftell(inptr);
                 if(ferror(inptr) == 0)
                 {
@@ -1547,7 +1547,7 @@ is_compressed_crw(FILE *inptr,unsigned long start_offset,unsigned long imageleng
     int count = 0;
     int ch,lastch;
 
-    if((inptr) && (fseek(inptr,start_offset + 512,0) != -1))
+    if((inptr) && (fseek(inptr,start_offset + 512,SEEK_SET) != -1))
     {
         if(imagelength < maxcheck)
             maxcheck = imagelength;

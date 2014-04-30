@@ -220,7 +220,7 @@ sanyo1_offset_makervalue(FILE *inptr,unsigned short byteorder,
                 }
                 /* make certain we're at the end                      */
                 clearerr(inptr);
-                fseek(inptr,value_offset + count,0);
+                fseek(inptr,value_offset + count,SEEK_SET);
                 break;
             case 0x0e00: /* PrintIM (Epson Print Image matching)      */
                 if(!at_offset && (PRINT_VALUE))
@@ -267,7 +267,7 @@ sanyo1_offset_makervalue(FILE *inptr,unsigned short byteorder,
                         chpr += printf(" # UNDEFINED");
                 }
                 /* make certain we're at the end                      */
-                fseek(inptr,value_offset + count,0);
+                fseek(inptr,value_offset + count,SEEK_SET);
                 break;
             default:
                 print_generic_offset_makervalue(inptr,byteorder,entry_ptr,

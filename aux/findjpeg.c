@@ -90,7 +90,7 @@ main(int argc,char **argv)
 
     if((fp = fopen(filename,"r")) != (FILE *)0)
     {
-        fseek(fp,start_offset,0);
+        fseek(fp,start_offset,SEEK_SET);
         while(((highbyte = fgetc(fp)) != EOF) && (ftell(fp) <= end_offset))
         {
             if(highbyte != 0xff)
@@ -111,14 +111,14 @@ main(int argc,char **argv)
                             //printf(" %#02x ",highbyte);
                             if(highbyte != 0xff)
                             {
-                                fseek(fp,-1L,1);
+                                fseek(fp,-1L,SEEK_CUR);
                                 continue;
                             }
                             if(((lobyte = fgetc(fp)) != EOF) && (ftell(fp) <= end_offset))
                             {
                                 if((lobyte < 0xc0) || (lobyte > 0xfe))
                                     continue;
-                                fseek(fp,-2L,1);
+                                fseek(fp,-2L,SEEK_CUR);
                                 if(tagloc == 0)
                                     soi_index = -1;
                                 ++soi_index;
