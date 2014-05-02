@@ -1,0 +1,4 @@
+*.o
+byteorder.h
+comptime.c
+exifprobe
