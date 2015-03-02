@@ -2885,19 +2885,29 @@ process_jpeg_segments(FILE *inptr,unsigned long marker_offset,unsigned short tag
                         unsigned char nf = 0;
                         unsigned char c,h,v,t,p;
                         int i;
+                        int iserror = 0;
 
                         if(PRINT_SEGMENT)
                             chpr += printf(" length %u",seg_length);
                         p = read_ubyte(inptr,HERE); /* precision    */
-                        if(!ferror(inptr) && !feof(inptr))
+                        if(!iserror && !ferror(inptr) && !feof(inptr))
                             img_height = read_ushort(inptr,TIFF_MOTOROLA,HERE);
-                        if(!ferror(inptr) && !feof(inptr))
+                        if(!iserror && !ferror(inptr) && !feof(inptr))
                             img_width = read_ushort(inptr,TIFF_MOTOROLA,HERE);
-                        if(!ferror(inptr) && !feof(inptr))
+                        if(!iserror && !ferror(inptr) && !feof(inptr))
                             img_pixels = img_height * img_width;
-                        if(!ferror(inptr) && !feof(inptr))
+                        if(!iserror && !ferror(inptr) && !feof(inptr))
+                        {
                             nf = read_ubyte(inptr,HERE); /* components */
-                        if(!ferror(inptr) && !feof(inptr))
+                            if (nf > MAXSAMPLE)
+                            {
+                                // See https://github.com/hfiguiere/exifprobe/issues/2
+                                // we shouldn't need to clamp nf value.
+                                nf = MAXSAMPLE;
+                                iserror = 1;
+                            }
+                        }
+                        if(!iserror && !ferror(inptr) && !feof(inptr))
                         {
                             max_offset = ftell(inptr);
                             if(PRINT_SEGMENT)
@@ -2910,7 +2920,7 @@ process_jpeg_segments(FILE *inptr,unsigned long marker_offset,unsigned short tag
                                     summary_entry->bps[i] = p;
                             }
                         }
-                        if(ferror(inptr) || feof(inptr))
+                        if(iserror || ferror(inptr) || feof(inptr))
                         {
                             tag = 0;
                             clearerr(inptr);
