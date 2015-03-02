@@ -75,7 +75,10 @@ interpret_value(struct ifd_entry *entry_ptr,struct image_summary *summary_entry)
             print_compression(entry_ptr->value);
             break;
         case TIFFTAG_PhotometricInterpretation:
-            print_photometric(entry_ptr->value,summary_entry->fileformat);
+            if (summary_entry)
+            {
+                print_photometric(entry_ptr->value,summary_entry->fileformat);
+            }
             break;
         case TIFFTAG_Orientation:
             print_orientation(entry_ptr->value);
