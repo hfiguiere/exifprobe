@@ -303,10 +303,19 @@ scan_summary(struct image_summary *summary_entry)
         if(summary_entry->bps[0] && summary_entry->spp)
         {
             int i;
+            int spp = summary_entry->spp;
             float total_bits,bytes_per_pixel;
 
             total_bits = 0;
-            for(i = 0; i < summary_entry->spp; ++i)
+            if (spp > MAXSAMPLE)
+            {
+                spp = MAXSAMPLE;
+                if(Debug & 0x4)
+                {
+                    printf("CLAMPING spp\n");
+                }
+            }
+            for(i = 0; i < spp; ++i)
                 total_bits += summary_entry->bps[i];
             bytes_per_pixel = total_bits / 8.0;
             if(Debug & 0x4)
