@@ -10,3 +10,9 @@ Original maintainer: Duane H. Hesser
 
 See file LICENSE.EXIFPROBE for the license
 (basically a 3 clause BSD).
+
+SECURITY NOTE
+=============
+
+This software hasn't been reviewed for security. Don't run it as
+root. Beware running it on untrusted source data.
