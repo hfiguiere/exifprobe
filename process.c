@@ -687,12 +687,16 @@ process_tiff_ifd(FILE *inptr,unsigned short byteorder,unsigned long ifd_offset,
                     case EXIFTAG_Interoperability: 
                         /* This doesn't belong in a TIFF IFD, but     */
                         /* be prepared.                               */
+                        /* Also we make sure we are not calling on    */
+                        /* the same ifd offset                        */
                         PUSHCOLOR(INTEROP_COLOR);
-                        value_offset = process_tiff_ifd(inptr,byteorder,
+                        if (entry_ptr->value != ifd_offset) {
+                            value_offset = process_tiff_ifd(inptr,byteorder,
                                                 entry_ptr->value,fileoffset_base,
                                                 next_ifd_offset,summary_entry,
                                                 listname,INTEROP_IFD,ifdnum,0,
                                                 indent);
+                        }
                         value_offset = 0;
                         POPCOLOR();
                         break;
