@@ -3322,7 +3322,7 @@ forward_scan_for_eoi(FILE *inptr,unsigned long start_of_data,
     {
         if(Debug & JPEG_EOI_DEBUG)
             printf("DEBUG: start scan at %lu\n",start_of_data);
-        while(((highbyte = fgetc(inptr)) != EOF) && (ftell(inptr) < end_of_section))
+        while(((highbyte = fgetc(inptr)) != EOF) && (highbyte != EOF) && (ftell(inptr) < end_of_section))
         {
             if(highbyte != JPEG_HIBYTE)
                 continue;
@@ -4336,7 +4336,7 @@ process_app12(FILE *inptr,unsigned long app12_offset,unsigned short tag,
                 nextch = putword(inptr,nextch,end_offset,indent);
             chpr = newline(chpr);
             offset = ftell(inptr);
-            while(nextch && (offset < end_offset))
+            while(nextch && (nextch != EOF) && (offset < end_offset))
             {
                 nextch = putword(inptr,nextch,end_offset,indent);
                 if(nextch)
@@ -4346,6 +4346,10 @@ process_app12(FILE *inptr,unsigned long app12_offset,unsigned short tag,
             while(offset < end_offset)
             {
                 nextch = skip_to_bracket(inptr,end_offset);
+                if(nextch == EOF)
+                {
+                    break;
+                }
                 size = ftell(inptr) - offset;
                 if(nextch == '[')
                     --size;
@@ -4360,7 +4364,7 @@ process_app12(FILE *inptr,unsigned long app12_offset,unsigned short tag,
                                     SMALLINDENT);
                         chpr = newline(1);
                         nextch = fgetc(inptr);
-                        if(ftell(inptr) >= end_offset)
+                        if((nextch == EOF) || (ftell(inptr) >= end_offset))
                             break;
                     }
                     else
@@ -4394,7 +4398,8 @@ process_app12(FILE *inptr,unsigned long app12_offset,unsigned short tag,
 int
 skip_past_newline(FILE *inptr,unsigned long max_offset)
 {
-    while(((unsigned long)ftell(inptr) < max_offset) && (fgetc(inptr) != '\n'))
+    int ch;
+    while(((unsigned long)ftell(inptr) < max_offset) && ((ch = fgetc(inptr)) != '\n') && ch != EOF)
         continue;
     return(fgetc(inptr));
 }
@@ -4407,7 +4412,7 @@ skip_to_bracket(FILE *inptr,unsigned long max_offset)
 {
     int ch = EOF;
 
-    while(((unsigned long)ftell(inptr) < max_offset) && ((ch = fgetc(inptr)) != '['))
+    while(((unsigned long)ftell(inptr) < max_offset) && ((ch = fgetc(inptr)) != '[') && ch != EOF)
         continue;
     if(ftell(inptr) >= max_offset)
         ch = 0;
