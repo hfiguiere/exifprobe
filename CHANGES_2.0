@@ -2,6 +2,7 @@
 * Fix crasher (Issue https://github.com/hfiguiere/exifprobe/issues/2)
 * Fix infinite loop due to premature end-of-file
   (Issue https://github.com/hfiguiere/exifprobe/issues/3)
+* Fix and infinite recursion for the Interop IFD parsing.
 * Fix other fuzzing crashers.
 * Added SRAW Type and Slice tags for CR2 files.
 * Fix build on Windows (Issue https://github.com/hfiguiere/exifprobe/pull/1)
