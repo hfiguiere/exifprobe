@@ -415,34 +415,25 @@ process_tiff_ifd(FILE *inptr,unsigned short byteorder,unsigned long ifd_offset,
                             case TIFFTAG_Make:
                                 if(Make_name == NULL)
                                 {
-                                    makename =
-                                        (char *)read_bytes(inptr,
-                                                        entry_ptr->count,
-                                                        fileoffset_base +
-                                                        entry_ptr->value);
-                                    Make_name = strdup(makename);
+                                    Make_name = strdup_value(entry_ptr,
+                                                             inptr,
+                                                             fileoffset_base);
                                 }
                                 break;
                             case TIFFTAG_Model:
                                 if(Model_name == NULL)
                                 {
-                                    modelname =
-                                        (char *)read_bytes(inptr,
-                                                        entry_ptr->count,
-                                                        fileoffset_base +
-                                                        entry_ptr->value);
-                                    Model_name = strdup(modelname);
+                                    Model_name = strdup_value(entry_ptr,
+                                                              inptr,
+                                                              fileoffset_base);
                                 }
                                 break;
                             case TIFFTAG_Software:
                                 if(Software_name == NULL)
                                 {
-                                    swname =
-                                        (char *)read_bytes(inptr,
-                                                        entry_ptr->count,
-                                                        fileoffset_base +
-                                                        entry_ptr->value);
-                                    Software_name = strdup(swname);
+                                    Software_name = strdup_value(entry_ptr,
+                                                                 inptr,
+                                                                 fileoffset_base);
                                 }
                                 break;
                         }

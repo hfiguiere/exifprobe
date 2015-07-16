@@ -86,6 +86,32 @@ value_type_name(unsigned short value_type)
 }
 
 
+/* caller must call free() */
+char *
+strdup_value(struct ifd_entry *entry, FILE *inptr,
+                                        unsigned long fileoffset_base)
+{
+    char *val;
+    if (is_offset(entry))
+    {
+        char *buf = (char *)read_bytes(inptr,
+                                       entry->count,
+                                       fileoffset_base +
+                                       entry->value);
+        val = strndup(buf, entry->count);
+        return val;
+    }
+    else
+    {
+        char *buf = (char *)&(entry->value);
+        val = (char*)calloc(entry->count + 1, sizeof(char));
+        for (int i = 0; i < entry->count; i++) {
+          val[i] = buf[i];
+        }
+        return val;
+    }
+}
+
 /* Print a summary of all of the images found in the file. This will  */
 /* include thumbnail images stored by the unpleasant but ubiquitous   */
 /* JPEFThumbnailFormat method as well as images described by TIFF     */
