@@ -435,6 +435,35 @@ canon1_offset_makervalue(FILE *inptr,unsigned short byteorder,
                 }
                 clearerr(inptr);
                 break;
+            case 0x009a:    /* AspectInfo                      */
+                if(at_offset)
+                {
+                    if((PRINT_SECTION))
+                    {
+                        print_tag_address(SECTION,value_offset,indent,prefix);
+                        chpr += printf("<%s> ",nameoftag);
+                        chpr += printf("%lu entries",entry_ptr->count - 1);
+                    }
+                }
+                else if((PRINT_VALUE))
+                    chpr += printf("\'%lu entries\'",entry_ptr->count - 1);
+                if((PRINT_LONGNAMES))
+                    tagprefix = fulldirname;
+                else
+                    tagprefix = nameoftag;
+                setcharsprinted(chpr);
+                chpr = 0;
+                (void)canon_aspectinfo(inptr,byteorder,tagprefix,value_offset,
+                                    entry_ptr->count * sizeof(long),
+                                    indent + MEDIUMINDENT);
+                if(PRINT_SECTION)
+                {
+                    print_tag_address(SECTION,value_offset + (entry_ptr->count * 2) - 1,
+                                                            indent,prefix);
+                    chpr += printf("</%s> ",nameoftag);
+                }
+                break;
+
             default:
                 print_generic_offset_makervalue(inptr,byteorder,entry_ptr,fileoffset_base,
                                                 fulldirname,prefix,indent,
@@ -514,14 +543,18 @@ maker_canon1_tagname(unsigned short tag,int model)
         case 0x0009: tagname = "OwnerName"; break;
         case 0x000a: tagname = "ColorInfoD30*"; break;
         case 0x000c: tagname = "CameraSerialNo"; break;
+        case 0x000d: tagname = "CameraInfo"; break;
         case 0x000e: tagname = "FileLength"; break;
         case 0x000f: tagname = "CustomFunctions"; break;
         case 0x0010: tagname = "UniqueModelId"; break; /* from dcraw */
         case 0x0012: tagname = "PictureInfo"; break;
+        case 0x0013: tagname = "ThumbnailImageValidArea"; break;
         case 0x0081: tagname = "JpegImage"; break;
         case 0x0090: tagname = "CustomFunctions"; break;
         case 0x0093: tagname = "FileInfo**"; break;   /* exiftool shows wrong type */
         case 0x0095: tagname = "LensName"; break;
+        case 0x0098: tagname = "CropInfo"; break;
+        case 0x009a: tagname = "AspectInfo"; break;
         case 0x00a0: tagname = "ColorInfo**"; break;  /* exiftool - wrong # values */
         case 0x00a9: tagname = "WhiteBalanceTable"; break;
         case 0x00ae: tagname = "ColorTemperature"; break;
@@ -2986,7 +3019,7 @@ canon_sensorinfo(FILE *inptr,unsigned short byteorder,char *tagprefix,
                     if((PRINT_VALUE))
                         chpr += printf(" = %u",value);
                     break;
-                case 7: 
+                case 7:
                     if((PRINT_TAGINFO))
                         chpr += printf(".%02d_%-26.26s",i,"SensorRightBorder");
                     if((PRINT_VALUE))
@@ -2997,6 +3030,130 @@ canon_sensorinfo(FILE *inptr,unsigned short byteorder,char *tagprefix,
                         chpr += printf(".%02d_%-26.26s",i,"SensorBottomBorder");
                     if((PRINT_VALUE))
                         chpr += printf(" = %u",value);
+                    break;
+                case 9:
+                    if((PRINT_TAGINFO))
+                        chpr += printf(".%02d_%-26.26s",i,"BlackMaskLeftBorder");
+                    if((PRINT_VALUE))
+                        chpr += printf(" = %u",value);
+                    break;
+                case 10:
+                    if((PRINT_TAGINFO))
+                        chpr += printf(".%02d_%-26.26s",i,"BlackMaskTopBorder");
+                    if((PRINT_VALUE))
+                        chpr += printf(" = %u",value);
+                    break;
+                case 11:
+                    if((PRINT_TAGINFO))
+                        chpr += printf(".%02d_%-26.26s",i,"BlackMaskRightBorder");
+                    if((PRINT_VALUE))
+                        chpr += printf(" = %u",value);
+                    break;
+                case 12:
+                    if((PRINT_TAGINFO))
+                        chpr += printf(".%02d_%-26.26s",i,"BlackMaskBottomBorder");
+                    if((PRINT_VALUE))
+                        chpr += printf(" = %u",value);
+                    break;
+                default:
+                    if((PRINT_TAGINFO))
+                        chpr += printf(".%02d_%-26.26s",i,"Undefined");
+                    if((PRINT_VALUE))
+                        chpr += printf(" = %#x%u",value,value);
+                    break;
+            }
+            chpr = newline(chpr);
+        }
+    }
+    setcharsprinted(chpr);
+    return(end_offset);
+}
+
+
+unsigned long
+canon_aspectinfo(FILE *inptr,unsigned short byteorder,char *tagprefix,
+                        unsigned long offset,unsigned long dirlength,int indent)
+{
+    unsigned long count;
+    unsigned long end_offset;
+    unsigned long value;
+    int i;
+    int chpr = 0;
+
+    end_offset = offset + dirlength;
+    if(PRINT_SECTION)
+    {
+        chpr += printf(" length %lu",dirlength);
+    }
+    chpr = newline(chpr);
+
+    if((PRINT_ENTRY))
+    {
+        count = (dirlength / sizeof(long));
+
+        for(i = 0; i <= count; ++i)
+        {
+            value = read_ulong(inptr,byteorder,offset);
+            print_tag_address(ENTRY,offset,indent,"@");
+            if((PRINT_TAGINFO))
+                chpr += printf("%s",tagprefix);
+            offset += 4;
+            switch(i)
+            {
+                case 0:
+                    if((PRINT_TAGINFO))
+                        chpr += printf(".%02d_%-26.26s",i,"AspectRatio");
+                    if((PRINT_VALUE))
+                        chpr += printf(" = %#lx",value);
+
+                        print_startvalue();
+                        switch(value)
+                        {
+                        case 0:
+                            chpr += printf("3:2");
+                            break;
+                        case 1:
+                            chpr += printf("1:1");
+                            break;
+                        case 2:
+                            chpr += printf("4:3");
+                            break;
+                        case 7:
+                            chpr += printf("16:9");
+                            break;
+                        case 8:
+                            chpr += printf("4:5");
+                            break;
+                        default:
+                            printred("undefined");
+                            break;
+                        }
+                        print_endvalue();
+
+                    break;
+                case 1:
+                    if((PRINT_TAGINFO))
+                        chpr += printf(".%02d_%-26.26s",i,"CroppedImageWidth");
+                    if((PRINT_VALUE))
+                        chpr += printf(" = %lu",value);
+                    break;
+                case 2:
+                    if((PRINT_TAGINFO))
+                        chpr += printf(".%02d_%-26.26s",i,"CroppedImageHeight");
+                    if((PRINT_VALUE))
+                        chpr += printf(" = %lu",value);
+                    break;
+                case 3:
+                    if((PRINT_TAGINFO))
+                        chpr += printf(".%02d_%-26.26s",i,"CroppedImageLeft");
+                    if((PRINT_VALUE))
+                        chpr += printf(" = %lu",value);
+                    break;
+                case 4:
+                    if((PRINT_TAGINFO))
+                        chpr += printf(".%02d_%-26.26s",i,"CroppedImageRight");
+                    if((PRINT_VALUE))
+                        chpr += printf(" = %lu",value);
                     break;
                 default:
                     if((PRINT_TAGINFO))

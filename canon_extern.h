@@ -48,6 +48,8 @@ extern unsigned long canon_customfunctions1D(FILE *,unsigned short,char *,
                                         unsigned long,unsigned long,int);
 extern unsigned long canon_sensorinfo(FILE *,unsigned short,char *,
                                         unsigned long,unsigned long,int);
+extern unsigned long canon_aspectinfo(FILE *,unsigned short,char *,
+                                        unsigned long,unsigned long,int);
 extern unsigned long canon_pictureinfo(FILE *,unsigned short,char *,
                                         unsigned long,unsigned long,int);
 extern unsigned long canon_colorspace(FILE *,unsigned short,char *,
