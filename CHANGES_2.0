@@ -10,6 +10,11 @@
 * Updated DNG for 1.3 and 1.4 spec.
 * Added Cinema DNG.
 * Fixed RAF header parsing.
+* Fix printing Software/Make/Model if it is less than 4 bytes (Found
+  in Sony and iPhone generated files).
+* More Canon MakerNote decoding.
+* Allow overriding CC at build time
+* Various misc fixed.
 
 2.0.1:
 The following changes have been made since version 2.0.0:
