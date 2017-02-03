@@ -2,7 +2,7 @@
 # Makefile for EXIFPROBE image file probe
 
 # Any compiler should do
-CC=cc
+CC?=cc
 CFLAGS=-DCOLOR -O -std=c99
 
 # You probably don't need these
