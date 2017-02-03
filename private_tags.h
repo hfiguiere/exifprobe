@@ -14,7 +14,7 @@
 /* Most of these are taken from libtiff/tiff.h, viz.                  */
 /* A few are taken from GeoTIFF                                       */
 
-#ifndef PRIVATE_TAGS_INDLUDED
+#ifndef PRIVATE_TAGS_INCLUDED
 #define PRIVATE_TAGS_INCLUDED
 
 
