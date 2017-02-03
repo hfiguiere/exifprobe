@@ -25,6 +25,7 @@ static char *ModuleId = "@(#) $Id: maker_olympus.c,v 1.25 2005/07/24 22:56:26 al
 
 #include <stdio.h>
 #include <string.h>
+#include <strings.h>
 #include <stdlib.h>
 #include "defs.h"
 #include "datadefs.h"

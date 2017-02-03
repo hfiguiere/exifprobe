@@ -44,6 +44,7 @@ static char *ModuleId = "@(#) $Id: maker_nikon.c,v 1.30 2005/07/24 22:56:26 alex
 
 #include <stdio.h>
 #include <string.h>
+#include <strings.h>
 #include <stdlib.h>
 #include <math.h>
 #include "defs.h"

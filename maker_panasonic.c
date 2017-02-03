@@ -21,6 +21,7 @@ static char *ModuleId = "@(#) $Id: maker_panasonic.c,v 1.5 2005/07/24 22:56:27 a
 
 #include <stdio.h>
 #include <string.h>
+#include <strings.h>
 #include <stdlib.h>
 #include "defs.h"
 #include "datadefs.h"

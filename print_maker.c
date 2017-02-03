@@ -12,6 +12,7 @@ static char *ModuleId = "@(#) $Id: print_maker.c,v 1.29 2005/07/24 17:27:09 alex
 
 #include <stdio.h>
 #include <string.h>
+#include <strings.h>
 
 #include "defs.h"
 #include "summary.h"

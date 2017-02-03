@@ -25,6 +25,7 @@ static char *ModuleId = "@(#) $Id: maker_canon.c,v 1.29 2005/07/24 22:56:26 alex
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include <time.h>
 
 #include "defs.h"

@@ -20,6 +20,7 @@ static char *ModuleId = "@(#) $Id: maker_konica.c,v 1.3 2005/07/24 22:56:26 alex
 
 #include <stdio.h>
 #include <string.h>
+#include <strings.h>
 #include <stdlib.h>
 #include "defs.h"
 #include "datadefs.h"

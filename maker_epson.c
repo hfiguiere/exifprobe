@@ -23,6 +23,7 @@ static char *ModuleId = "@(#) $Id: maker_epson.c,v 1.22 2005/07/24 22:56:26 alex
 
 #include <stdio.h>
 #include <string.h>
+#include <strings.h>
 #include <stdlib.h>
 #include "defs.h"
 #include "datadefs.h"

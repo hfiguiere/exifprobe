@@ -16,6 +16,7 @@ static char *ModuleId = "@(#) $Id: maker_generic.c,v 1.40 2005/07/24 21:34:37 al
 
 #include <stdio.h>
 #include <string.h>
+#include <strings.h>
 #include <stdlib.h>
 #include <ctype.h>
 

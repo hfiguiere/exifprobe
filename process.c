@@ -18,6 +18,7 @@ static char *ModuleId = "@(#) $Id: process.c,v 1.47 2005/07/25 22:05:10 alex Exp
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include <ctype.h>
 
 #include "defs.h"

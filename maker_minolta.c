@@ -29,6 +29,7 @@ static char *ModuleId = "@(#) $Id: maker_minolta.c,v 1.28 2005/07/24 21:57:28 al
 
 #include <stdio.h>
 #include <string.h>
+#include <strings.h>
 #include <stdlib.h>
 #include "defs.h"
 #include "datadefs.h"

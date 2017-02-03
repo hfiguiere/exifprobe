@@ -16,6 +16,7 @@ static char *ModuleId = "@(#) $Id: maker_kyocera.c,v 1.5 2005/07/24 22:56:26 ale
 
 #include <stdio.h>
 #include <string.h>
+#include <strings.h>
 #include <stdlib.h>
 #include "defs.h"
 #include "datadefs.h"

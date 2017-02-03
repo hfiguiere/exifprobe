@@ -12,6 +12,7 @@ static char *ModuleId = "@(#) $Id: maker_hp.c,v 1.2 2005/07/24 22:56:26 alex Exp
 
 #include <stdio.h>
 #include <string.h>
+#include <strings.h>
 #include "defs.h"
 #include "datadefs.h"
 #include "maker_datadefs.h"

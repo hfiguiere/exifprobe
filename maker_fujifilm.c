@@ -20,6 +20,7 @@ static char *ModuleId = "@(#) $Id: maker_fujifilm.c,v 1.13 2005/07/24 22:56:26 a
 
 #include <stdio.h>
 #include <string.h>
+#include <strings.h>
 #include "defs.h"
 #include "datadefs.h"
 #include "maker_datadefs.h"
