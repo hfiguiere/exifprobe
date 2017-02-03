@@ -223,7 +223,8 @@ process_ciff_dir(FILE *inptr,unsigned long start_offset,unsigned long end_offset
         else
         {
             print_tag_address(SECTION|ENTRY,max_dir_offset - 1,indent,"-");
-            tablename = tablename ? tablename : QSTRING;
+            /* tablename is dynamically allocated */
+            tablename = tablename ? tablename : strdup(QSTRING);
             chpr += printf("</%s>\n",tablename);
             print_tag_address(SECTION|ENTRY,end_offset - 4,indent,"-");
             chpr += printf("%s location = @%lu",tablename,dircount_loc);
