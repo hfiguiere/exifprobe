@@ -248,11 +248,15 @@ env_options()
     envopts = getenv("EXIFPROBE_OPTIONS");
     if(envopts && *envopts)
     {
+        char *argstr = calloc(strlen(envopts) + 3, 1);
+        strcpy(argstr, "e ");
+        strcat(argstr, envopts);
         optind = 0;
         /* make an argument vector                                    */
-        argc = vector(envopts,argv," \t",0,MAXARGV);
+        argc = vector(argstr, argv, " \t", 0, MAXARGV);
         (void)process_options(argc,argv);
         optind = 1;
+        free(argstr);
     }
 }
 
