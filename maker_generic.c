@@ -414,8 +414,9 @@ process_makernote(FILE *inptr,unsigned short byteorder,
                 if((value_offset < end_of_note) && (value_offset > max_value_offset))
                     max_value_offset = value_offset;
             }
-            else if(value_offset > max_value_offset);
+            else if(value_offset > max_value_offset) {
                 max_value_offset = value_offset;
+            }
             if((is_offset(entry_ptr) || maker_value_is_offset(entry_ptr,make,model)))
                 ++use_second_pass;
         }
@@ -736,13 +737,16 @@ maker_number(char *make)
     struct camera_name *maker_id;
     int number = NO_MAKE;
 
-    /* 'Camera_make' is a global parameter                            */
-    for(maker_id = Camera_make; maker_id && maker_id->name; ++maker_id)
+    if(make)
     {
-        if(strncasecmp(make,maker_id->name,maker_id->namelen) == 0)
+        /* 'Camera_make' is a global parameter                            */
+        for(maker_id = Camera_make; maker_id && maker_id->name; ++maker_id)
         {
-            number = maker_id->id;
-            break;
+            if(strncasecmp(make,maker_id->name,maker_id->namelen) == 0)
+            {
+                number = maker_id->id;
+                break;
+            }
         }
     }
     return(number);
@@ -952,7 +956,7 @@ find_makerscheme(FILE *inptr,unsigned long note_offset,
     note_fileoffset = note_offset + fileoffset_base;
 
     id= (char *)read_bytes(inptr,MAX_IDLEN,note_fileoffset);
-    length_read = strlen(id);
+    length_read = id ? strlen(id) : 0;
 
     /* check that string is printable, adjust id_length if nexessary  */
     if(PRINT_SCHEME_DEBUG)

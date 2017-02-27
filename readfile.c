@@ -526,7 +526,7 @@ read_bytes(FILE *inptr,unsigned long nbytes,unsigned long offset)
 {
     static unsigned char rbuf[MAXBUFLEN];
     unsigned long curoffset;
-    unsigned char *value = (unsigned char *)NULLSTRING;
+    unsigned char *value = NULL;
     int chpr = 0;
 
     memset(rbuf,0,MAXBUFLEN);
