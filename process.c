@@ -3909,8 +3909,15 @@ process_app1(FILE *inptr,unsigned long app1_offset,unsigned short tag,
                     if(PRINT_SECTION)
                     {
                         extraindent(indent + ADDRWIDTH);
-                        chpr += printf(" INVALID MAGIC %lu (%s) where TIFF header should be",
-                                header->probe_magic,tagname(header->probe_magic));
+                        if(header)
+                        {
+                            chpr += printf(" INVALID MAGIC %lu (%s) where TIFF header should be",
+                                         header->probe_magic,tagname(header->probe_magic));
+                        }
+                        else
+                        {
+                            chpr += printf(" INVALID HEADER for TIFF");
+                        }
 #define PRINT_A_BIT 48
                         if(app_length > PRINT_A_BIT)
                             dumplength = PRINT_A_BIT;
@@ -4094,8 +4101,15 @@ process_app3(FILE *inptr,unsigned long app3_offset,unsigned short tag,
                     if(PRINT_SECTION)
                     {
                         extraindent(indent + ADDRWIDTH);
-                        chpr += printf(" INVALID MAGIC %lu (%s) where TIFF header should be",
-                                header->probe_magic,tagname(header->probe_magic));
+                        if(header)
+                        {
+                            chpr += printf(" INVALID MAGIC %lu (%s) where TIFF header should be",
+                                           header->probe_magic,tagname(header->probe_magic));
+                        }
+                        else
+                        {
+                            chpr += printf(" INVALID HEADER for TIFF");
+                        }
 #define PRINT_A_BIT 48
                         if(app_length > PRINT_A_BIT)
                             dumplength = PRINT_A_BIT;

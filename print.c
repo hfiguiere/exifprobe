@@ -1849,7 +1849,7 @@ print_unicode(FILE *inptr,unsigned long count,unsigned long offset,unsigned shor
 {
     int remaining;
     int nread;
-    int ch;
+    int ch = 0;
     int chpr = 0;
 
     nread = 0;
