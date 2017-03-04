@@ -135,8 +135,8 @@ read_imageheader(FILE *inptr,unsigned long offset)
                     if(length == 12)
                     {
                         type = read_bytes(inptr,4,HERE);
-                        if((strncmp((char *)type,"jP\040\040  ",4) == 0) ||
-                            (strncmp((char *)type,"jP\032\032  ",4) == 0))
+                        if(type && ((strncmp((char *)type,"jP\040\040  ",4) == 0) ||
+                                    (strncmp((char *)type,"jP\032\032  ",4) == 0)))
                         {
                             umagic = read_ulong(inptr,TIFF_MOTOROLA,HERE);
                             if(umagic == 0x0d0a870a)
