@@ -922,6 +922,8 @@ process_tiff_ifd(FILE *inptr,unsigned short byteorder,unsigned long ifd_offset,
                 }
                 if(value_offset == 0L) /* bad entry; try the next one */
                     clearerr(inptr);
+                else if(value_offset > filesize)
+                    goto blewit;
                 else if(value_offset > max_value_offset)
                     max_value_offset = value_offset;
             }
