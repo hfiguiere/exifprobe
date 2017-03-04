@@ -2128,7 +2128,7 @@ pushcolor(int color)
             colorstack_index = 0;
             colorstack[0] = END_COLOR;
         }
-        else if(colorstack_index >= COLORSTACKSIZE)
+        else if(colorstack_index >= (COLORSTACKSIZE - 1))
             colorstack_index = 0;
 
         printf("\033[%dm",color);
