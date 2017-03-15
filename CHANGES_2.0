@@ -1,7 +1,7 @@
 2.1.0:
 * Fix crashers:
   - https://github.com/hfiguiere/exifprobe/issues/5
-  - https://github.com/hfiguiere/exifprobe/issues/5
+  - https://github.com/hfiguiere/exifprobe/issues/9
 * Fix infinite loop due to premature end-of-file
   (Issue https://github.com/hfiguiere/exifprobe/issues/3)
 * Fix and infinite recursion for the Interop IFD parsing.

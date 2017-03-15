@@ -924,7 +924,7 @@ print_offset_value(FILE *inptr,unsigned short byteorder,
 /* Read 'count' unsigned bytes starting at 'offset' and print their   */
 /* values in hex. If there are a lot, just print the first few, an    */
 /* elipsis to admit that something is left out, then print the count  */
-/* and the last value and it's offset.                                */
+/* and the last value and its offset.                                 */
 
 void
 print_ubytes(FILE *inptr,unsigned long count,unsigned long offset)
@@ -995,7 +995,7 @@ print_ubytes(FILE *inptr,unsigned long count,unsigned long offset)
 /* Read 'count' signed bytes starting at 'offset' and print their     */
 /* values in decimale. If there are a lot, just print the first few,  */
 /* an elipsis to admit that something is left out, then print the     */
-/* last value and it's offset.                                        */
+/* last value and its offset.                                         */
 
 void
 print_sbytes(FILE *inptr,unsigned long count,unsigned long offset)
