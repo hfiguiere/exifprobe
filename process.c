@@ -541,8 +541,20 @@ process_tiff_ifd(FILE *inptr,unsigned short byteorder,unsigned long ifd_offset,
             }
             else
                 next_ifd_offset += fileoffset_base;
-            if((next_ifd_offset < ftell(inptr)) || 
-                ((ifdtype != TIFF_IFD) && (ifdtype != TIFF_SUBIFD)))
+
+            /* Corrupt file will cause infinite loops. So we abort.
+             * It is possible this can be worked around better.
+             * See Issue #9 https://github.com/hfiguiere/exifprobe/issues/9
+             */
+            if(next_ifd_offset < ftell(inptr)) {
+              printred("\nReading IFD backwards. INVALID FILE. ABORTING.\n");
+              exit(1);
+            } else if (next_ifd_offset > filesize) {
+              printred("\nReading IFD past EOF. INVALID FILE. ABORTING.\n");
+              exit(1);
+            }
+            /* We should be able to tolerate these */
+            if ((ifdtype != TIFF_IFD) && (ifdtype != TIFF_SUBIFD))
             {
                 if(PRINT_SECTION)
                     printred(" INVALID NEXT IFD OFFSET ");
