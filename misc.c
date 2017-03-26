@@ -87,18 +87,21 @@ value_type_name(unsigned short value_type)
 
 
 /* caller must call free() */
+/* return NULL on error / buffer overflow */
 char *
 strdup_value(struct ifd_entry *entry, FILE *inptr,
                                         unsigned long fileoffset_base)
 {
-    char *val;
+    char *val = NULL;
     if (is_offset(entry))
     {
         char *buf = (char *)read_bytes(inptr,
                                        entry->count,
                                        fileoffset_base +
                                        entry->value);
-        val = strndup(buf, entry->count);
+        if (buf) {
+            val = strndup(buf, entry->count);
+        }
         return val;
     }
     else
