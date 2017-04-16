@@ -2821,6 +2821,7 @@ process_jpeg_segments(FILE *inptr,unsigned long marker_offset,unsigned short tag
                         (void)jpeg_status(JPEG_HAD_ERROR);
                         if(summary_entry)
                             summary_entry->imagesubformat |= IMGSUBFMT_JPEGFAILED;
+                        return 0;
                     }
                     break;
                 case JPEG_COM:
