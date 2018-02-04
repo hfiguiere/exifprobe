@@ -1130,6 +1130,8 @@ nikon2_interpret_offset_makervalue(FILE *inptr,unsigned short byteorder,
             default:
                 break;
         }
+        free(fullnameoftag);
+        fullnameoftag = NULL;
     }
     setcharsprinted(chpr);
 }
