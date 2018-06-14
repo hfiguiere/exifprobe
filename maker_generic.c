@@ -1260,44 +1260,44 @@ find_makerscheme(FILE *inptr,unsigned long note_offset,
         switch(make)
         {
             case MAKER_AGFA:
-                if((maker_scheme.note_version == 0))
+                if(maker_scheme.note_version == 0)
                     setnoteversion(1);
                 break;
             case MAKER_ASAHI: /* fall through */
             case MAKER_PENTAX:
                 if(maker_scheme.scheme_type == PLAIN_IFD_SCHEME)
                     maker_scheme.offsets_relative_to = START_OF_ENTRY;
-                if((maker_scheme.note_version == 0))
+                if(maker_scheme.note_version == 0)
                     (void)set_asahi_noteversion();
                 break;
             case MAKER_CANON:
-                if((maker_scheme.note_version == 0))
+                if(maker_scheme.note_version == 0)
                     setnoteversion(1);
                 break;
             case MAKER_CASIO:
-                if((maker_scheme.note_version == 0))
+                if(maker_scheme.note_version == 0)
                     (void)set_casio_noteversion();
                 break;
             case MAKER_EPSON:
-                if((maker_scheme.note_version == 0))
+                if(maker_scheme.note_version == 0)
                     setnoteversion(1);
                 break;
             case MAKER_FUJIFILM:
                 maker_scheme.offsets_relative_to = START_OF_NOTE;
                 maker_scheme.fileoffset_base = note_fileoffset;
-                if((maker_scheme.note_version == 0))
+                if(maker_scheme.note_version == 0)
                     setnoteversion(1);
                 break;
             case MAKER_HP:      /* proprietary makernote              */
-                if((maker_scheme.note_version == 0))
+                if(maker_scheme.note_version == 0)
                     setnoteversion(-1);
                 break;
             case MAKER_KODAK:   /* proprietary makernote              */
-                if((maker_scheme.note_version == 0))
+                if(maker_scheme.note_version == 0)
                     setnoteversion(-1);
                 break;
             case MAKER_KONICA:  /* no makernote data                  */
-                if((maker_scheme.note_version == 0))
+                if(maker_scheme.note_version == 0)
                     setnoteversion(-1);
                 break;
             case MAKER_LEICA:
@@ -1307,11 +1307,11 @@ find_makerscheme(FILE *inptr,unsigned long note_offset,
                     maker_scheme.fileoffset_base = note_fileoffset;
                     /* maker_scheme.no_nextifd_offset = 1; */
                 }
-                if((maker_scheme.note_version == 0))
+                if(maker_scheme.note_version == 0)
                     setnoteversion(1);
                 break;
             case MAKER_MINOLTA:
-                if((maker_scheme.note_version == 0))
+                if(maker_scheme.note_version == 0)
                     setnoteversion(1);
                 break;
             case MAKER_KYOCERA:
@@ -1319,44 +1319,44 @@ find_makerscheme(FILE *inptr,unsigned long note_offset,
                 maker_scheme.no_nextifd_offset = 1;
                 break;
             case MAKER_NIKON:
-                if((maker_scheme.note_version == 0))
+                if(maker_scheme.note_version == 0)
                     (void)set_nikon_noteversion();
                 break;
             case MAKER_OLYMPUS:
-                if((maker_scheme.note_version == 0))
+                if(maker_scheme.note_version == 0)
                     setnoteversion(1);
                 break;
             case MAKER_PANASONIC:
                 maker_scheme.no_nextifd_offset = 1;
-                if((maker_scheme.note_version == 0))
+                if(maker_scheme.note_version == 0)
                     setnoteversion(1);
                 break;
             case MAKER_TOSHIBA:
-                if((maker_scheme.note_version == 0))
+                if(maker_scheme.note_version == 0)
                     setnoteversion(1);
                 maker_scheme.no_nextifd_offset = 1;
                 break;
             case MAKER_RICOH:    /* no or non-IFD makernote data      */
-                if((maker_scheme.note_version == 0))
+                if(maker_scheme.note_version == 0)
                     setnoteversion(-1);
                 break;
             case MAKER_SANYO:
-                if((maker_scheme.note_version == 0))
+                if(maker_scheme.note_version == 0)
                     setnoteversion(1);
                 break;
             case MAKER_SIGMA:
                 if(model == SIGMA_SD9)
                     maker_scheme.no_nextifd_offset = 1;
-                if((maker_scheme.note_version == 0))
+                if(maker_scheme.note_version == 0)
                     setnoteversion(1);
                 break;
             case MAKER_SONY:
-                if((maker_scheme.note_version == 0))
+                if(maker_scheme.note_version == 0)
                     setnoteversion(-1);
                 maker_scheme.no_nextifd_offset = 1;
                 break;
             case MAKER_TRAVELER:    /* proprietary makernote          */
-                if((maker_scheme.note_version == 0))
+                if(maker_scheme.note_version == 0)
                     setnoteversion(-1);
                 break;
             default:

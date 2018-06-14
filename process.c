@@ -1071,7 +1071,7 @@ process_tiff_ifd(FILE *inptr,unsigned short byteorder,unsigned long ifd_offset,
                     /* If there's a length set in the summary, assume */
                     /* there's already an image associated with this  */
                     /* entry.                                         */
-                    if((summary_entry->length == 0UL))
+                    if(summary_entry->length == 0UL)
                     {
                         /* Othersise, make sure the jpeg processor    */
                         /* uses the current summary entry             */
