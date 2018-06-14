@@ -1,8 +1,8 @@
-...
-... (C) Copyright 2002, 2003, 2005  Duane H. Hesser, see LICENSE.EXIFPROBE file
-... @(#) $Id: exifprobe.1,v 1.30 2005/07/12 18:16:47 alex Exp $
-...
-
+.\" ...
+.\" ... (C) Copyright 2002, 2003, 2005  Duane H. Hesser, see LICENSE.EXIFPROBE file
+.\" ... @(#) $Id: exifprobe.1,v 1.30 2005/07/12 18:16:47 alex Exp $
+.\" ...
+.\"
 .TH EXIFPROBE 1 LOCAL
 .SH NAME
 exifprobe \- probe and report structure and metadata content of camera image files
@@ -15,7 +15,7 @@ exifprobe \- probe and report structure and metadata content of camera image fil
 .B Exifprobe
 reads image files produced by digital cameras (including several
 so-called "raw" file formats) and reports the structure of the files and
-the auxilliary data and metadata contained within them. In addition to
+the auxiliary data and metadata contained within them. In addition to
 TIFF, JPEG, and EXIF, the program understands several formats which may
 contain "raw" camera data, including MRW, CIFF/CRW, JP2/JPEG2000, RAF,
 and X3F, as well as most most TIFF-derived "raw" formats, including DNG,
@@ -162,7 +162,7 @@ in red.  These sequences are effective, of
 course, only for terminals or terminal emulators (e.g. \fBxterm\fP)
 which respond to ANSI color escape sequences.  If a pager is used
 to display the output when these sequences are present, a \*(lqraw\*(rq
-option to the pager may be required (e.g. \fBless\fP -R).  The use
+option to the pager may be required (e.g. \fBless\fP \-R).  The use
 of these sequences may be toggled by the \fB-c\fP option.  LIST mode
 turns color sequences off.
 
@@ -264,7 +264,7 @@ list.
 .P
 If there were offset entries found in the list above, the TIFF (and Exif)
 specification requires that they will be located
-next in the file, immediately following the dirctory entries.
+next in the file, immediately following the directory entries.
 This stricture is frequently ignored in MakerNotes and TIFF-derived formats.
 A line reporting the beginning of these offset values
 will be printed immediately after the next IFD offset,
@@ -334,7 +334,7 @@ contains multiple image sections.
 The \*(lqvalue\*(rq of tags or items which represent an offset to a subsection
 or image are printed in \fIlist\fP format as \*(lq\fI@offset:length\fP\*(rq.
 
-The List format is used by the auxilliary script \fBexifgrep\fP, which permits
+The List format is used by the auxiliary script \fBexifgrep\fP, which permits
 selective extraction of information e.g. for photo galleries, and output in
 (almost) \*(lqshell variable\*(rq format.
 
@@ -348,14 +348,14 @@ in the pre-defined formats.
 As an example, the command:
 .nf
 
-    \fIexifprobe -Z -et somefile.tif\fP
+    \fIexifprobe \-Z \-et somefile.tif\fP
 
 .fi
 may be used to list just the TIFF and Exif tags, without values (or anything
 else) in \*(lqlong name\*(rq format.  
 .nf
 
-    \fI exifprobe -eNnT somefile.tif\fP
+    \fI exifprobe \-eNnT somefile.tif\fP
 
 .fi
 will print in structural format, suppressing output of hex and decimal
@@ -369,7 +369,7 @@ The environment variable \fBEXIFPROBE_OPTIONS\fP may be set to any
 valid option string, which will be evaluated before command line
 options. E.g.
 
-export EXIFPROBE_OPTIONS='-L -c'
+export EXIFPROBE_OPTIONS='\-L \-c'
 
 will make list format the default output format, and re-enable the
 color sequences turned off by \fI-L\fP.
