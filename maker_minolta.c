@@ -597,7 +597,7 @@ minolta1_interpret_offset_makervalue(FILE *inptr,unsigned short byteorder,
                 switch(value)
                 {
                     case 0: chpr += printf("Normal"); break;
-                    case 1: chpr += printf("Unkown"); break;
+                    case 1: chpr += printf("Unknown"); break;
                     case 2: chpr += printf("Fast"); break;
                     case 3: chpr += printf("Panorama,");
                             value = read_ulong(inptr,byteorder,HERE);

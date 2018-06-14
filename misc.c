@@ -887,7 +887,7 @@ tiff_compression_string(unsigned long compvalue)
         /* will be 0 only if compression tag does not appear                     */
         case 0: compression = "unknown format"; break;
         case 1: compression = "uncompressed"; break;    /* TIFF6/TIFF_EP         */
-        case 2: compression = "Modifed Huffman RLE compressed"; break; /* TIFF6  */
+        case 2: compression = "Modified Huffman RLE compressed"; break; /* TIFF6  */
         case 3: compression = "T4 fax encoded"; break;  /* TIFF6                 */
         case 4: compression = "T6 fax encoded"; break;  /* TIFF6                 */
         case 5: compression = "LZW compressed"; break;  /* TIFF6                 */
