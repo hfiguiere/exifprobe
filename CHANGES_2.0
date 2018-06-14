@@ -16,8 +16,12 @@
 * Fix printing Software/Make/Model if it is less than 4 bytes (Found
   in Sony and iPhone generated files).
 * More Canon MakerNote decoding.
+* Misc fixes.
 * Allow overriding CC at build time
-* Various misc fixes.
+* Makefile now honour DESTDIR and uses install
+  (https://github.com/hfiguiere/exifprobe/issues/16)
+* Misc spelling errors. (https://github.com/hfiguiere/exifprobe/issues/16)
+* Misc man page fixes. (https://github.com/hfiguiere/exifprobe/issues/16)
 
 2.0.1:
 The following changes have been made since version 2.0.0:
