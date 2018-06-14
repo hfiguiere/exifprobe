@@ -3,7 +3,7 @@
 
 # Any compiler should do
 CC?=cc
-CFLAGS=-DCOLOR -O -std=c99
+CFLAGS+=-DCOLOR -O -std=c99
 
 # You probably don't need these
 # CFLAGS=-DCOLOR -g -O -Dlint -Wall  -Wno-long-long 
@@ -22,10 +22,10 @@ CFLAGS=-DCOLOR -O -std=c99
 #CFLAGS += -DNATIVE_BYTEORDER_BIGENDIAN     # or add to ./byteorder.h
 
 # On Solaris, you may need to use 'gmake', or edit the next line.
-PREFIX ?= /usr/local
-BINDIR=$(PREFIX)/bin
-MANDIR=$(PREFIX)/man/man1
-
+INSTALL = install -d -m 644
+PREFIX ?= $(DESTDIR)/usr
+BINDIR=$(PREFIX)/bin/local
+MANDIR=$(PREFIX)/share/man/man1
 
 INCLUDES=defs.h extern.h misc.h tifftags.h exiftags.h \
 	tiffeptags.h jpegtags.h global.h
@@ -63,18 +63,20 @@ byteorder.h:
 	@echo 
 
 veclib.o: lib/veclib.c
-	$(CC) -o veclib.o -c $(CFLAGS) lib/veclib.c
+	$(CC) -o veclib.o -c $(CFLAGS) $(LDFLAGS) $(CPPFLAGS) lib/veclib.c
 
 # Need the math library to calculate some APEX things...
 exifprobe: $(OBJS) $(INCLUDES) Makefile
 	./mkcomptime > comptime.c
-	$(CC) -o exifprobe $(CFLAGS) $(OBJS) comptime.c -lm
+	$(CC) -o exifprobe $(CFLAGS) $(LDFLAGS) $(CPPFLAGS) $(OBJS) comptime.c -lm
 
 install: all
-	cp exifprobe $(BINDIR)
-	cp exifgrep $(BINDIR)
-	cp exifprobe.1 $(MANDIR)
-	cp exifgrep.1 $(MANDIR)
+	install -d $(PREFIX)/bin
+	install -d $(PREFIX)/share/man/man1
+	install -c -m 755 exifprobe $(PREFIX)/bin
+	install -c -m 755 exifgrep $(PREFIX)/bin
+	install -c -m 644  exifprobe.1 $(PREFIX)/share/man/man1
+	install -c -m 644  exifgrep.1 $(PREFIX)/share/man/man1
 
 # if you want HTML man pages, pick a target; I prefer man2html
 rman: exifprobe.1 exifgrep.1
