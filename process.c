@@ -4357,7 +4357,7 @@ process_app12(FILE *inptr,unsigned long app12_offset,unsigned short tag,
             offset = ftell(inptr);
             if(PRINT_SECTION)
                 chpr = newline(chpr);
-            if(offset < end_offset);
+            if(offset < end_offset)
                 nextch = putword(inptr,nextch,end_offset,indent);
             chpr = newline(chpr);
             offset = ftell(inptr);
