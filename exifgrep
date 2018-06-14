@@ -183,7 +183,7 @@ do
                  *) notpattern="$2"; shift; shift; break ;;
               esac
               ;;
-           *) pattern=$1; shift
+           *) pattern="$1"; shift
               case $1 in
                 NOT) case "$2" in
                         -f) notpattern="-f $3"; shift; shift; shift; break ;;
@@ -213,17 +213,17 @@ esac
 # exifprobe -L output.
 
 case $# in
-     0) egrep ${egrep_options} ${pattern} | format
+     0) egrep ${egrep_options} "${pattern}" | format
         ;;
      *) case $# in
             1) ;;
             *) nameopt="-n" ;;  # Use names if more than one file
         esac
         case "${notpattern}" in
-            "") ${PROBE} -L ${coloropt} ${nameopt} ${tagopt} $* | egrep ${egrep_options} ${pattern} | format ;;
+            "") ${PROBE} -L ${coloropt} ${nameopt} ${tagopt} $* | egrep ${egrep_options} "${pattern}" | format ;;
              *) case "${pattern}" in
-                    "") ${PROBE} -L ${coloropt} ${nameopt} ${tagopt} $* | egrep ${egrep_options} -v ${notpattern} | format ;;
-                     *) ${PROBE} -L ${coloropt} ${nameopt} ${tagopt} $* | egrep ${egrep_options} ${pattern} | egrep -v ${notpattern} | format ;;
+                    "") ${PROBE} -L ${coloropt} ${nameopt} ${tagopt} $* | egrep ${egrep_options} -v "${notpattern}" | format ;;
+                     *) ${PROBE} -L ${coloropt} ${nameopt} ${tagopt} $* | egrep ${egrep_options} "${pattern}" | egrep -v "${notpattern}" | format ;;
                 esac
                 ;;
         esac
