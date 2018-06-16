@@ -26,6 +26,8 @@ static char *ModuleId = "@(#) $Id: jp2000.c,v 1.10 2005/07/24 19:54:04 alex Exp 
 /* 64-bit addressing is not yet supported                             */
 /* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
 
+#define _DEFAULT_SOURCE /* for isacii() */
+
 #include <stdio.h>
 #include <string.h>
 #include <time.h>

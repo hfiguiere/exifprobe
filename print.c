@@ -13,6 +13,8 @@ static char *ModuleId = "@(#) $Id: print.c,v 1.51 2005/07/24 17:16:59 alex Exp $
 /* This file contains the primary "print" routines for TIFF/EXIF      */
 /* data, file offsets, etc.                                           */
 
+#define _DEFAULT_SOURCE /* for isacii() */
+
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>

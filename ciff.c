@@ -21,6 +21,8 @@ static char *ModuleId = "@(#) $Id: ciff.c,v 1.8 2005/07/24 17:03:18 alex Exp $";
 /*    http://www.sno.phy.queensu.ca/~phil/exiftool/canon_raw.html     */
 /* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
 
+#define _POSIX_C_SOURCE 200809L /* for strdup() */
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

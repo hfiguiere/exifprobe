@@ -10,6 +10,8 @@
 static char *ModuleId = "@(#) $Id: tagnames.c,v 1.21 2005/07/24 19:40:09 alex Exp $";
 #endif
 
+#define _POSIX_C_SOURCE 200809L /* for strdup() */
+
 #include <stdio.h>
 #include <string.h>
 #include "defs.h"

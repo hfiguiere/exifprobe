@@ -10,6 +10,8 @@
 static char *ModuleId = "@(#) $Id: options.c,v 1.21 2005/07/24 17:18:27 alex Exp $";
 #endif
 
+#define _POSIX_C_SOURCE 1 /* for fileno() */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>

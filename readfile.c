@@ -21,6 +21,7 @@ static char *ModuleId = "@(#) $Id: readfile.c,v 1.30 2005/07/24 18:15:28 alex Ex
 /* byteorder is "little-endian". The code does not currently handle   */
 /* "pdp11" byteorder.                                                 */
 
+#define _DEFAULT_SOURCE /* for isacii() */
 
 #include <stdio.h>
 #include <stdint.h>

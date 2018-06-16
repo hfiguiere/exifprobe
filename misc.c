@@ -10,6 +10,8 @@
 static char *ModuleId = "@(#) $Id: misc.c,v 1.22 2005/07/24 16:01:17 alex Exp $";
 #endif
 
+#define _POSIX_C_SOURCE 200809L /* for strdup() */
+
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
