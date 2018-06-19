@@ -179,7 +179,7 @@ epson1_offset_makervalue(FILE *inptr,unsigned short byteorder,
                 if((PRINT_VALUE))
                 {
                     if((PRINT_OFFSET) && !at_offset)
-                            chpr += chpr += printf(" = ");
+                            chpr += printf(" = ");
                     print_user_comment(inptr,entry_ptr->count,value_offset,byteorder);
                 }
                 break;
@@ -192,7 +192,7 @@ epson1_offset_makervalue(FILE *inptr,unsigned short byteorder,
                 if((PRINT_VALUE))
                 {
                     if((PRINT_OFFSET) && !at_offset)
-                        chpr += chpr += printf(" = ");
+                        chpr += printf(" = ");
                     print_ascii(inptr,entry_ptr->count,value_offset);
                 }
                 break;
