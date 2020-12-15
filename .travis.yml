@@ -29,7 +29,14 @@ matrix:
             packages:
               - gcc-6
       env: COMPILER=gcc-6
-      # added power support  
+      # added power support 
+    - os: linux
+      dist: trusty
+      arch: ppc64le
+    - os: osx
+      osx_image: xcode7.2
+    - os: osx
+      osx_image: xcode8.1
     - compiler: gcc
       env: COMPILER=gcc
       arch: ppc64le
